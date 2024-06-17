@@ -1,0 +1,87 @@
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white; /* White background */
+  }
+  
+  .bg-light {
+    background-color: white !important; /* Ensures the container background is white */
+  }
+  
+  .equal-height-row {
+    display: flex;
+  }
+  
+  .custom-card {
+    height: 100%; /* Ensure cards take full height */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #444; /* Optional: Add a border for better visibility */
+    color: white;
+  }
+  
+  .custom-card.black-card {
+    background-color: black;
+  }
+  
+  .custom-card.grey-card {
+    background-color: grey;
+  }
+  
+  .custom-card .card-body {
+    flex: 1; /* Ensure the body takes all available space */
+  }
+  
+  .custom-card p,
+  .custom-card .card-title {
+    color: white; /* Ensure text color is white */
+  }
+  
+  .custom-card .btn {
+    background-color: white;
+    color: black;
+    border: none;
+    margin-top: 10px;
+  }
+  
+  .custom-card.black-card .btn {
+    background-color: grey;
+  }
+  
+  .custom-card.grey-card .btn {
+    background-color: black;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Circular avatar */
+  }
+  
+  .user-info {
+    flex: 1;
+  }
+  
+  .user-title {
+    font-size: 16px;
+    color: #999;
+  }
+  
+  .user-name {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: black; /* Ensure text is readable */
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

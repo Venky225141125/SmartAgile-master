@@ -1,0 +1,14 @@
+.moving-image {
+    animation: moveImage 2s linear infinite alternate; /* Example animation, adjust as needed */
+  }
+  
+  @keyframes moveImage {
+    from {
+      transform: translateX(0); /* Starting position */
+    }
+    to {
+      transform: translateX(50px); /* Ending position */
+    }
+  }
+  
+  

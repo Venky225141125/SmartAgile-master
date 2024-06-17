@@ -1,0 +1,36 @@
+/* src/components/EmployeeActivityTable.css */
+.circular-progress {
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .progress-ring {
+    animation: progress 1s ease-out;
+    transform: rotate(0deg);
+  }
+  
+  .progress-ring__circle {
+    transition: stroke-dashoffset 0.35s;
+    transform: translate(0px, 0px);
+    
+    stroke: #055a0c;
+  }
+  
+  .progress-ring__text {
+    font-size: 0.6em;
+    fill: #3f51b5;
+  }
+  Card.Text{
+    background: #000;
+  }
+  
+  @keyframes progress {
+    from {
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  
