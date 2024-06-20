@@ -13,6 +13,7 @@ const Register = () => {
 
   const handleRegister = () => {
     // Check if passwords match
+
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -36,9 +37,9 @@ const Register = () => {
       .then((response) => {
         console.log("Success:", response.data);
         if (role === "admin") {
-          navigate("/admin/sprint-dashboard");
+          navigate("/adminlogin");
         } else {
-          navigate("/employee/dashboard");
+          navigate("/loging");
         }
       })
       .catch((error) => {
