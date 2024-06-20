@@ -11,10 +11,8 @@ import DataCheck from "./components/data.js";
 import ForgotPassword from "./components/Forgotpassword";
 import UserProfile from "./components/UserProfile";
 import Employee from "./components/Employee";
-//import "bootstrap/dist/css/bootstrap.min.css";
-import EmployeeDashboard from './Dashboards/EmployeeDBComponent/EmployeeDashboard';
-import GroupDashboard from './Dashboards/GroupDBComponent/GroupDashboard';
-import SprintDashboard from './Dashboards/SprintDBComponents/SprintDashboard';
+import EmployeeDashboard from "./Dashboards/EmployeeDBComponent/EmployeeDashboard";
+import GroupDashboard from "./Dashboards/GroupDBComponent/GroupDashboard";
 import LandingPage from "./components/LandingPage.js";
 import LoginPage from "./components/LoginPage.js";
 import EmployeeProfiles from "./components/EmployeeProfiles.js";
@@ -23,18 +21,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/adminlogin" element={<AdminLogin />} />
-      <Route path="/loging" element={<Login />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/signup" element={<Signup />} />
-  
-      <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
-      <Route path="/group/dashboard" element={<GroupDashboard />} />
-      <Route path="/admin/sprint-dashboard" element={<SprintDashboard />} />
-      <Route path="/admin/employee-profiles" element={<EmployeeProfiles />} />
       
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/loging" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/signup" element={<Signup />} />
+
+        <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
+        <Route path="/group/dashboard" element={<GroupDashboard />} />
+        <Route path="/admin/sprint-dashboard" element={<SprintDashboard />} />
+        <Route path="/admin/employee-profiles" element={<EmployeeProfiles />} />
+
         {/* Add other routes as needed */}
       </Routes>
       
