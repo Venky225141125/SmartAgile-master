@@ -1,46 +1,76 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleForgotPassword = async () => {
+    setMessage("");
+    setError("");
+
+    const formData = new FormData();
+    formData.append("email", email);
+
     try {
-      // Replace with your API endpoint
-      const response = await axios.post('/api/forgot-password', { email });
-      setMessage(response.data.message);
+      const response = await axios.post(
+        "http://localhost:8000/api/forgetpassword/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Success:", response.data);
+      localStorage.setItem("otp", JSON.stringify(response.data.otp));
+      localStorage.setItem("reset_email", JSON.stringify(email));
+      navigate("/forget/resetpassword");
     } catch (error) {
-      setMessage('An error occurred. Please try again.');
+      if (error.response) {
+        console.error("Error response:", error.response.data);
+        setError(
+          error.response.data.error || "Failed to send reset instructions."
+        );
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+        setError("No response received from server.");
+      } else {
+        console.error("Error message:", error.message);
+        setError("Failed to send reset instructions. Please try again.");
+      }
     }
   };
 
   return (
-    <div className="forgotpassword container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="card-title text-center">Forgot Password</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">Submit</button>
-              </form>
-              {message && <p className="mt-3 text-center">{message}</p>}
-            </div>
-          </div>
+    <div className="forgotpassword min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-80">
+        <h1 className="text-2xl mb-4 text-center font-bold">Forgot Password</h1>
+        <div className="mb-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full m-2 p-2 border border-gray-300 rounded"
+          />
         </div>
+        <div>
+          <button
+            onClick={handleForgotPassword}
+            className="w-full m-2 p-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            Send Reset Instructions
+          </button>
+        </div>
+        {message && (
+          <div className="mt-4 text-center text-green-600">{message}</div>
+        )}
+        {error && <div className="mt-4 text-center text-red-600">{error}</div>}
       </div>
     </div>
   );

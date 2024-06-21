@@ -1,7 +1,15 @@
 from rest_framework import generics
 from .models import SignupData
 from .serializers import SignupDataSerializer
-# views.py
+from django.core.exceptions import ValidationError
+import traceback
+from django.core import validators
+from backend import settings
+import random
+from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ObjectDoesNotExist
+from email.mime.text import MIMEText
+import smtplib
 from django.db import connection
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -79,16 +87,6 @@ class LoginView(APIView):
             """)
         
 
-# class SignupDataCreateView(generics.CreateAPIView):
-#     queryset = SignupData.objects.all()
-#     serializer_class = SignupDataSerializer
-#     def create(self, request, *args, **kwargs):
-#         email = request.data.get('email')
-#         if SignupData.objects.filter(email=email).exists():
-#             return Response({'error': 'Email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
-        
-#         return super().create(request, *args, **kwargs)
-
 class SignupDataCreateView(APIView):
     def post(self, request):
         serializer = SignupDataSerializer(data=request.data)
@@ -111,3 +109,85 @@ class CheckDataView(APIView):
             return Response({'data_exists': data_exists,'data':data})
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ForgotPasswordView(APIView):
+    def post(self, request):
+        try:
+            email = request.data.get('email')
+            
+            if not email:
+                return Response({'error': 'Email is required'}, status=400)
+
+            validators.validate_email(email)  # Validate email format
+            user = SignupData.objects.filter(email=email).first()
+            if not user:
+                return Response({'error': 'User with this email does not exist.'}, status=400)
+            
+            otp = random.randint(100000, 999999)
+            request.session['otp'] = otp
+            request.session['reset_email'] = email
+
+            smtp_server = settings.EMAIL_HOST
+            smtp_port = 587  # Change according to your SMTP server settings
+            smtp_username = settings.EMAIL_HOST_USER
+            smtp_password = settings.EMAIL_HOST_PASSWORD
+            sender_email = settings.EMAIL_HOST_USER
+
+            subject = 'Password Reset OTP'
+            body = f'Your OTP for password reset is {otp}.'
+            self.send_email(subject, body, sender_email, email, smtp_server, smtp_port, smtp_username, smtp_password)
+
+            return Response({'message': 'Reset instructions sent to your email.', 'otp': otp})
+
+        except validators.ValidationError as e:
+            return Response({'error': str(e)}, status=400)
+
+        except Exception as e:
+            traceback.print_exc()  # Print the traceback to console
+            return Response({'error': 'Internal Server Error'}, status=500)
+
+    def send_email(self, subject, message, sender_email, receiver_email, smtp_server, smtp_port, smtp_username, smtp_password):
+        msg = MIMEText(message)
+        msg['Subject'] = subject
+        msg['From'] = sender_email
+        msg['To'] = receiver_email
+
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.sendmail(sender_email, receiver_email, msg.as_string())
+
+class ResetPasswordView(APIView):
+    def post(self, request):
+        try:
+            otp = request.data.get('otp')
+            sotp = request.data.get('sotp')
+            email = request.data.get('email')
+            new_password = request.data.get('password')
+
+            if otp != sotp:
+                return Response({'error': "OTP doesn't match"}, status=400)
+
+            if not email:
+                return Response({'error': 'Email is required'}, status=400)
+
+            # Validate email format (optional)
+            # from django.core import validators
+            # validators.validate_email(email)
+
+            user = SignupData.objects.filter(email=email).first()
+            if not user:
+                return Response({'error': 'User with this email does not exist.'}, status=400)
+
+            with connection.cursor() as cursor:
+                cursor.execute("UPDATE smartagile_signupdata SET password = %s WHERE email = %s", [new_password, email])
+
+            return Response({'message': 'Password updated successfully'}, status=200)
+        
+        except ObjectDoesNotExist:
+            return Response({'error': 'error', 'message': 'User with the given email does not exist'}, status=400)
+        except Exception as e:
+            return Response({'error': 'error', 'message': str(e)}, status=500)
+
+            

@@ -119,7 +119,7 @@ function Login() {
             </button>
           </div>
           <p className="text-end mt-2">
-            <Link to="/forgotpassword">Forgot Password?</Link>
+            <Link to="/forget">Forgot Password?</Link>
           </p>
         </form>
       </div>
