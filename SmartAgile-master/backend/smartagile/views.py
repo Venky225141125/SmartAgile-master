@@ -158,6 +158,13 @@ class ForgotPasswordView(APIView):
             server.login(smtp_username, smtp_password)
             server.sendmail(sender_email, receiver_email, msg.as_string())
 
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.contrib.auth.hashers import make_password
+from .models import SignupData  # Import the model
+import traceback
+
 class ResetPasswordView(APIView):
     def post(self, request):
         try:
@@ -172,22 +179,19 @@ class ResetPasswordView(APIView):
             if not email:
                 return Response({'error': 'Email is required'}, status=400)
 
-            # Validate email format (optional)
-            # from django.core import validators
-            # validators.validate_email(email)
-
             user = SignupData.objects.filter(email=email).first()
             if not user:
                 return Response({'error': 'User with this email does not exist.'}, status=400)
 
-            with connection.cursor() as cursor:
-                cursor.execute("UPDATE smartagile_signupdata SET password = %s WHERE email = %s", [new_password, email])
+            # Hash the new password
+            #hashed_password = make_password(new_password)
+            user.password = new_password
+            user.save()
 
             return Response({'message': 'Password updated successfully'}, status=200)
         
         except ObjectDoesNotExist:
-            return Response({'error': 'error', 'message': 'User with the given email does not exist'}, status=400)
+            return Response({'error': 'User with the given email does not exist'}, status=400)
         except Exception as e:
-            return Response({'error': 'error', 'message': str(e)}, status=500)
-
-            
+            traceback.print_exc()
+            return Response({'error': str(e)}, status=500)

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../assets/smartagilelogo.png"; // Replace with your actual logo path
 
-const PasswordReset = () => {
+const PasswordResetForm = () => {
   const navigate = useNavigate(); // Initialize navigate from useNavigate hook
   const [otp, setOTP] = useState("");
   const [password, setPassword] = useState("");
@@ -120,4 +120,4 @@ const PasswordReset = () => {
   );
 };
 
-export default PasswordReset;
+export default PasswordResetForm;
