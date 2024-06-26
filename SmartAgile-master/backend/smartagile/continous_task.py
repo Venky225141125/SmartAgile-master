@@ -7,14 +7,26 @@ from pynput import mouse, keyboard
 from datetime import datetime
 from django.conf import settings
 import ctypes
+import joblib
+import logging
+import pandas as pd
 
+rf_model_path = os.path.join(os.path.dirname(__file__), 'models', 'rf_model.pkl')
+rf_model = joblib.load(rf_model_path)
+svm_model_path=os.path.join(os.path.dirname(__file__), 'models', 'svm_pipeline.pkl')
+svm_model=joblib.load(svm_model_path)
+app_vectorizer_model_path=os.path.join(os.path.dirname(__file__), 'models', 'app_vectorizer.pkl')
+app_model=joblib.load(app_vectorizer_model_path)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')  # Replace 'backend.settings' with your project settings module
 import django
 django.setup()
 
 running_flag = False
 thread = None
-
+from sklearn.exceptions import DataConversionWarning
+import warnings
+# Suppress specific warnings
+warnings.filterwarnings('ignore', category=DataConversionWarning)
 top_100_browsers_list = [
     "chrome.exe", "safari.exe", "msedge.exe", "firefox.exe", "samsunginternet.exe", "opera.exe",
     "uc.exe", "brave.exe", "vivaldi.exe", "tor.exe", "maxthon.exe", "qqbrowser.exe", "yandex.exe",
@@ -105,6 +117,7 @@ def track_application_usage(user_id):
             ID SERIAL PRIMARY KEY,
             ApplicationName TEXT,
             Task TEXT,
+            Category TEXT,
             Duration REAL,
             IdleTime REAL,
             Keystrokes REAL,
@@ -120,6 +133,7 @@ def track_application_usage(user_id):
             ID SERIAL PRIMARY KEY,
             BrowserName TEXT,
             Website TEXT,
+            Category TEXT,
             Duration REAL,
             IdleTime REAL,
             Keystrokes REAL,
@@ -146,6 +160,11 @@ def track_application_usage(user_id):
 
     mouse_listener.start()
     keyboard_listener.start()
+    loaded_pipeline = joblib.load(svm_model_path)
+    vectorizer_app = joblib.load(app_vectorizer_model_path)
+    model = joblib.load(rf_model_path)
+
+    logging.info("Loaded models and vectorizers.")
     try:
         while running_flag:
             active_window = get_active_window_info()
@@ -161,9 +180,12 @@ def track_application_usage(user_id):
                     if app_name is not None:
                         if any(browser in app_name for browser in top_100_browsers_list):
                             browser_name = next((browser for browser in top_100_browsers_list if browser in app_name), "Unknown Browser")
+                            prediction_input = pd.DataFrame([task], columns=['Task'])
+                            predicted_category = loaded_pipeline.predict(prediction_input)[0]
+
                             cursor.execute(f"""
-                                INSERT INTO browser_usage{table_suffix} (BrowserName, Website, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_DATE)
+                                INSERT INTO browser_usage{table_suffix} (BrowserName, Website, Category,Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s,CURRENT_DATE)
                                 ON CONFLICT (BrowserName, Website, Date)
                                 DO UPDATE SET
                                 Keystrokes = browser_usage{table_suffix}.Keystrokes + EXCLUDED.Keystrokes,
@@ -171,11 +193,14 @@ def track_application_usage(user_id):
                                 Scrolls = browser_usage{table_suffix}.Scrolls + EXCLUDED.Scrolls,
                                 IdleTime = browser_usage{table_suffix}.IdleTime + EXCLUDED.IdleTime,
                                 Duration = browser_usage{table_suffix}.Duration + EXCLUDED.Duration
-                            """, (browser_name, task, time_spent, idle_time, keystroke_count, click_count, scroll_count))
+                            """, (browser_name, task, predicted_category,time_spent, idle_time, keystroke_count, click_count, scroll_count))
                         else:
+                            new_app_vectorized = vectorizer_app.transform([app_name])
+                            input_data = pd.DataFrame(new_app_vectorized.toarray(), columns=vectorizer_app.get_feature_names_out())
+                            predicted_category = model.predict(input_data)[0]
                             cursor.execute(f"""
-                                INSERT INTO application_usage{table_suffix} (ApplicationName, Task, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_DATE)
+                                INSERT INTO application_usage{table_suffix} (ApplicationName, Task,Category, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s,CURRENT_DATE)
                                 ON CONFLICT (ApplicationName, Task, Date)
                                 DO UPDATE SET
                                 Keystrokes = application_usage{table_suffix}.Keystrokes + EXCLUDED.Keystrokes,
@@ -183,7 +208,7 @@ def track_application_usage(user_id):
                                 Scrolls = application_usage{table_suffix}.Scrolls + EXCLUDED.Scrolls,
                                 IdleTime = application_usage{table_suffix}.IdleTime + EXCLUDED.IdleTime,
                                 Duration = application_usage{table_suffix}.Duration + EXCLUDED.Duration
-                            """, (app_name, task, time_spent, idle_time, keystroke_count, click_count, scroll_count))
+                            """, (app_name, task, predicted_category,time_spent, idle_time, keystroke_count, click_count, scroll_count))
 
                         conn.commit()
 
