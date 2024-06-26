@@ -1,0 +1,528 @@
+app_name,file_path,category
+Visual Studio,C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe,work
+Eclipse,C:\Users\username\eclipse\java-2021-06\eclipse\eclipse.exe,work
+IntelliJ IDEA,C:\Program Files\JetBrains\IntelliJ IDEA 2021.1.1\bin\idea64.exe,work
+PyCharm,C:\Program Files\JetBrains\PyCharm 2021.1.1\bin\pycharm64.exe,work
+WebStorm,C:\Program Files\JetBrains\WebStorm 2021.1.1\bin\webstorm64.exe,work
+PhpStorm,C:\Program Files\JetBrains\PhpStorm 2021.1.1\bin\phpstorm64.exe,work
+RubyMine,C:\Program Files\JetBrains\RubyMine 2021.1.1\bin\rubymine64.exe,work
+AppCode,C:\Program Files\JetBrains\AppCode 2021.1.1\bin\appcode64.exe,work
+CLion,C:\Program Files\JetBrains\CLion 2021.1.1\bin\clion64.exe,work
+Rider,C:\Program Files\JetBrains\Rider 2021.1.1\bin\rider64.exe,work
+GoLand,C:\Program Files\JetBrains\GoLand 2021.1.1\bin\goland64.exe,work
+DataGrip,C:\Program Files\JetBrains\DataGrip 2021.1.1\bin\datagrip64.exe,work
+Android Studio,C:\Program Files\Android\Android Studio\bin\studio64.exe,work
+Xcode,C:\Applications\Xcode.app\Contents\MacOS\Xcode,work
+NetBeans,C:\Program Files\NetBeans 12.3\bin\netbeans64.exe,work
+Sublime Text,C:\Program Files\Sublime Text 3\sublime_text.exe,work
+Atom,C:\Users\username\AppData\Local\atom\app-1.57.0\atom.exe,work
+Visual Studio Code,C:\Users\username\AppData\Local\Programs\Microsoft VS Code\Code.exe,work
+Notepad++,C:\Program Files\Notepad++\notepad++.exe,work
+Vim,C:\Program Files (x86)\Vim\vim81\gvim.exe,work
+Emacs,C:\Program Files\Emacs\emacs-27.1\bin\runemacs.exe,work
+Brackets,C:\Program Files (x86)\Brackets\Brackets.exe,work
+BlueJ,C:\Program Files\BlueJ\BlueJ.exe,work
+Arduino IDE,C:\Program Files (x86)\Arduino\arduino.exe,work
+Komodo Edit,C:\Program Files\ActiveState Komodo Edit 12\lib\mozilla\komodo.exe,work
+UltraEdit,C:\Program Files\IDM Computer Solutions\UltraEdit\uedit64.exe,work
+TextPad,C:\Program Files (x86)\TextPad 8\TextPad.exe,work
+BBEdit,C:\Applications\BBEdit.app\Contents\MacOS\BBEdit,work
+Notepad3,C:\Program Files\Rizonesoft\Notepad3\Notepad3.exe,work
+Light Table,C:\Program Files (x86)\LightTable\LightTable.exe,work
+GNU Emacs,C:\Program Files\GNU Emacs 27.1\bin\emacs.exe,work
+Geany,C:\Program Files (x86)\Geany\bin\geany.exe,work
+Kate,C:\Program Files\Kate\bin\kate.exe,work
+jEdit,C:\Program Files (x86)\jEdit\jedit.exe,work
+Eclipse CDT,C:\Users\username\eclipse\cpp-2021-06\eclipse\eclipse.exe,work
+Anaconda Navigator,C:\Users\username\anaconda3\Scripts\anaconda-navigator.exe,work
+Spyder,C:\Users\username\anaconda3\Scripts\spyder.exe,work
+Jupyter Notebook,C:\Users\username\anaconda3\Scripts\jupyter-notebook.exe,work
+PyDev,C:\Users\username\eclipse\java-2021-06\eclipse\eclipse.exe -clean -vmargs -Dosgi.clean=true -Dpydev.debug=True,work
+Wing IDE,C:\Program Files (x86)\Wing IDE 7\bin\wing.exe,work
+Komodo IDE,C:\Program Files\ActiveState Komodo IDE 12\lib\mozilla\komodo.exe,work
+Microsoft Power BI Desktop,C:\Program Files\Microsoft Power BI Desktop\bin\PBIDesktop.exe,work
+Tableau Desktop,C:\Program Files\Tableau\Tableau 2021.1\bin\tableau.exe,work
+QlikView,C:\Program Files\QlikView\Qv.exe,work
+Qlik Sense,C:\Program Files\Qlik\Sense\QlikSense.exe,work
+Alteryx Designer,C:\Program Files\Alteryx\bin\AlteryxGui.exe,work
+KNIME Analytics Platform,C:\Program Files\KNIME\knime.exe,work
+RapidMiner,C:\Program Files\RapidMiner\RapidMiner Studio\RapidMiner-Studio.exe,work
+TIBCO Spotfire,C:\Program Files\TIBCO\Spotfire\7.14.0\Spotfire.Dxp.exe,work
+SAP Lumira,C:\Program Files\SAP Lumira\SAPLumira.exe,work
+Oracle Data Visualization,C:\Program Files\Oracle\DVD\dvdesktop.exe,work
+Zoho Analytics,C:\Program Files (x86)\Zoho Analytics\ZohoAnalytics.exe,work
+JMP,C:\Program Files\SAS\JMP\15\jmp.exe,work
+Minitab,C:\Program Files\Minitab\Minitab 19\bin\Minitab.exe,work
+SPSS,C:\Program Files\IBM\SPSS\Statistics\26\stats.exe,work
+SAS,C:\Program Files\SASHome\SASFoundation\9.4\sas.exe,work
+Stata,C:\Program Files (x86)\Stata16\StataMP-64.exe,work
+RStudio,C:\Program Files\RStudio\bin\rstudio.exe,work
+MATLAB,C:\Program Files\MATLAB\R2021a\bin\matlab.exe,work
+Octave,C:\Program Files\GNU Octave\Octave-6.2.0\octave.vbs,work
+Scilab,C:\Program Files\scilab-6.1.1\bin\WScilex.exe,work
+Maxima,C:\Program Files (x86)\Maxima-5.44.0\bin\maxima.bat,work
+SageMath,C:\Program Files\SageMath 9.2\sage.exe,work
+Wolfram Mathematica,C:\Program Files\Wolfram Research\Mathematica\12.3\Mathematica.exe,work
+Maple,C:\Program Files\Maple 2021\bin.X86_64_WINDOWS\maplew.exe,work
+Eviews,C:\Program Files (x86)\EViews 11\EViews11.exe,work
+Gretl,C:\Program Files\gretl\gretl.exe,work
+GraphPad Prism,C:\Program Files (x86)\GraphPad\Prism 9\Prism.exe,work
+OriginPro,C:\Program Files\OriginLab\Origin2021\Origin.exe,work
+JASP,C:\Program Files\JASP\JASP.exe,work
+PSPP,C:\Program Files\PSPP\psppire.exe,work
+Statistica,C:\Program Files\TIBCO\Statistica\Statistica.exe,work
+Mplus,C:\Program Files\Mplus\Mplus.exe,work
+LISREL,C:\Program Files\LISREL\LISREL.exe,work
+Amos,C:\Program Files\IBM\SPSS\Amos\25\Amos.exe,work
+NVivo,C:\Program Files\QSR\NVivo 12\NVivo.exe,work
+ATLAS.ti,C:\Program Files\Scientific Software\ATLAS.ti 9\ATLAS.ti.exe,work
+MaxQDA,C:\Program Files\VERBI\MAXQDA 2021\MAXQDA.exe,work
+QDA Miner,C:\Program Files\Provalis Research\QDA Miner 6\QDA Miner.exe,work
+Microsoft SQL Server Management Studio,C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\Ssms.exe,work
+Oracle SQL Developer,C:\sqldeveloper\sqldeveloper.exe,work
+MySQL Workbench,C:\Program Files\MySQL\MySQL Workbench 8.0\MySQLWorkbench.exe,work
+pgAdmin 4,C:\Program Files\PostgreSQL\13\pgAdmin 4\bin\pgAdmin4.exe,work
+DBeaver,C:\Program Files\DBeaver\dbeaver.exe,work
+HeidiSQL,C:\Program Files\HeidiSQL\heidisql.exe,work
+Toad for Oracle,C:\Program Files\Quest Software\Toad for Oracle 13.3\toad.exe,work
+Navicat Premium,C:\Program Files\PremiumSoft\Navicat Premium 15\navicat.exe,work
+RazorSQL,C:\Program Files\RazorSQL\razorsql.exe,work
+DbVisualizer,C:\Program Files\DbVisualizer\dbvis.exe,work
+SQuirreL SQL Client,C:\Program Files\squirrel-sql-3.9.1\squirrel-sql.bat,work
+JetBrains PyCharm,C:\Program Files\JetBrains\PyCharm 2021.1.1\bin\pycharm64.exe,work
+JetBrains IntelliJ IDEA,C:\Program Files\JetBrains\IntelliJ IDEA 2021.1.1\bin\idea64.exe,work
+JetBrains PhpStorm,C:\Program Files\JetBrains\PhpStorm 2021.1.1\bin\phpstorm64.exe,work
+JetBrains WebStorm,C:\Program Files\JetBrains\WebStorm 2021.1.1\bin\webstorm64.exe,work
+JetBrains CLion,C:\Program Files\JetBrains\CLion 2021.1.1\bin\clion64.exe,work
+JetBrains Rider,C:\Program Files\JetBrains\Rider 2021.1.1\bin\rider64.exe,work
+JetBrains RubyMine,C:\Program Files\JetBrains\RubyMine 2021.1.1\bin\rubymine64.exe,work
+JetBrains AppCode,C:\Program Files\JetBrains\AppCode 2021.1.1\bin\appcode64.exe,work
+R,C:\Program Files\R\R-4.0.5\bin\x64\Rgui.exe,work
+Dundas BI,C:\Program Files\Dundas\Dundas BI\DundasBI.exe,work
+Sisense,C:\Program Files\Sisense\Sisense.exe,work
+Looker,C:\Program Files\Looker\Looker.exe,work
+Domo,C:\Program Files\Domo\Domo.exe,work
+GoodData,C:\Program Files\GoodData\GoodData.exe,work
+MicroStrategy,C:\Program Files\MicroStrategy\MicroStrategy.exe,work
+Periscope Data,C:\Program Files\Periscope Data\PeriscopeData.exe,work
+Birst,C:\Program Files\Birst\Birst.exe,work
+Chartio,C:\Program Files\Chartio\Chartio.exe,work
+ClearStory Data,C:\Program Files\ClearStory Data\ClearStoryData.exe,work
+Aqua Data Studio,C:\Program Files\Aqua Data Studio\datastudio.exe,work
+SQLyog,C:\Program Files\SQLyog\SQLyog.exe,work
+Valentina Studio,C:\Program Files\Valentina Studio\valentina.exe,work
+SQL Workbench/J,C:\Program Files\SQL Workbench\sqlworkbench.exe,work
+DatabaseSpy,C:\Program Files\DatabaseSpy\DatabaseSpy.exe,work
+Altova XMLSpy,C:\Program Files\Altova\XMLSpy2021\XMLSpy.exe,work
+Altova MapForce,C:\Program Files\Altova\MapForce2021\MapForce.exe,work
+Altova StyleVision,C:\Program Files\Altova\StyleVision2021\StyleVision.exe,work
+Altova DatabaseSpy,C:\Program Files\Altova\DatabaseSpy2021\DatabaseSpy.exe,work
+Altova UModel,C:\Program Files\Altova\UModel2021\UModel.exe,work
+Altova DiffDog,C:\Program Files\Altova\DiffDog2021\DiffDog.exe,work
+Altova SchemaAgent,C:\Program Files\Altova\SchemaAgent2021\SchemaAgent.exe,work
+Altova Authentic,C:\Program Files\Altova\Authentic2021\Authentic.exe,work
+Altova SemanticWorks,C:\Program Files\Altova\SemanticWorks2021\SemanticWorks.exe,work
+Microsoft Word,C:\Program Files\Microsoft Office\Office365\WINWORD.EXE,work
+Google Chrome,C:\Program Files (x86)\Google\Chrome\Application\chrome.exe,personal
+Slack,C:\Users\username\AppData\Local\slack\slack.exe,communication
+Minecraft,C:\Program Files (x86)\Minecraft Launcher\MinecraftLauncher.exe,entertainment
+Adobe Photoshop,C:\Program Files\Adobe\Adobe Photoshop 2021\Photoshop.exe,work
+Zoom,C:\Program Files\Zoom\bin\Zoom.exe,communication
+Spotify,C:\Users\username\AppData\Roaming\Spotify\Spotify.exe,entertainment
+Firefox,C:\Program Files\Mozilla Firefox\firefox.exe,personal
+Microsoft Excel,C:\Program Files\Microsoft Office\Office365\EXCEL.EXE,work
+Discord,C:\Users\username\AppData\Local\Discord\app-0.0.309\Discord.exe,communication
+VLC Media Player,C:\Program Files\VideoLAN\VLC\vlc.exe,entertainment
+Telegram,C:\Users\username\AppData\Roaming\Telegram Desktop\Telegram.exe,communication
+Skype,C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe,communication
+iTunes,C:\Program Files\iTunes\iTunes.exe,entertainment
+Git,C:\Program Files\Git\bin\git.exe,work
+LibreOffice Writer,C:\Program Files\LibreOffice\program\swriter.exe,work
+Thunderbird,C:\Program Files\Mozilla Thunderbird\thunderbird.exe,personal
+Audacity,C:\Program Files (x86)\Audacity\audacity.exe,entertainment
+OneNote,C:\Program Files\Microsoft Office\Office365\ONENOTE.EXE,work
+Steam,C:\Program Files (x86)\Steam\steam.exe,entertainment
+Microsoft Teams,C:\Users\username\AppData\Local\Microsoft\Teams\current\Teams.exe,communication
+Paint.NET,C:\Program Files\paint.net\PaintDotNet.exe,work
+Dropbox,C:\Program Files (x86)\Dropbox\Client\Dropbox.exe,personal
+7-Zip,C:\Program Files\7-Zip\7zFM.exe,work
+Outlook,C:\Program Files\Microsoft Office\Office365\OUTLOOK.EXE,work
+GIMP,C:\Program Files\GIMP 2\bin\gimp-2.10.exe,work
+Blender,C:\Program Files\Blender Foundation\Blender 2.92\blender.exe,work
+CyberLink PowerDirector,C:\Program Files\CyberLink\PowerDirector18\PDR.exe,entertainment
+FileZilla,C:\Program Files\FileZilla FTP Client\filezilla.exe,work
+WinRAR,C:\Program Files\WinRAR\WinRAR.exe,work
+Trello,C:\Users\username\AppData\Local\Programs\Trello\Trello.exe,work
+Opera,C:\Users\username\AppData\Local\Programs\Opera\launcher.exe,personal
+WhatsApp,C:\Users\username\AppData\Local\WhatsApp\WhatsApp.exe,communication
+Krita,C:\Program Files\Krita (x64)\bin\krita.exe,work
+DaVinci Resolve,C:\Program Files\Blackmagic Design\DaVinci Resolve\Resolve.exe,entertainment
+BitTorrent,C:\Users\username\AppData\Roaming\BitTorrent\BitTorrent.exe,personal
+Adobe Illustrator,C:\Program Files\Adobe\Adobe Illustrator 2021\Support Files\Contents\Windows\Illustrator.exe,work
+BlueStacks,C:\Program Files\BlueStacks\Bluestacks.exe,entertainment
+GitHub Desktop,C:\Users\username\AppData\Local\GitHubDesktop\GitHubDesktop.exe,work
+Postman,C:\Users\username\AppData\Local\Postman\Postman.exe,work
+Adobe Premiere Pro,C:\Program Files\Adobe\Adobe Premiere Pro 2021\Adobe Premiere Pro.exe,work
+KeePass,C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe,personal
+OBS Studio,C:\Program Files\obs-studio\bin\64bit\obs64.exe,entertainment
+HandBrake,C:\Program Files\HandBrake\HandBrake.exe,work
+NordVPN,C:\Program Files\NordVPN\NordVPN.exe,personal
+Lightroom,C:\Program Files\Adobe\Adobe Lightroom\Lightroom.exe,work
+CamScanner,C:\Users\username\AppData\Local\CamScanner\CamScanner.exe,work
+Recuva,C:\Program Files\Recuva\recuva.exe,work
+FL Studio,C:\Program Files\Image-Line\FL Studio 20\FL64.exe,entertainment
+Google Drive,C:\Program Files\Google\Drive\googledrivesync.exe,personal
+Power BI Desktop,C:\Program Files\Microsoft Power BI Desktop\bin\PBIDesktop.exe,work
+WinSCP,C:\Program Files (x86)\WinSCP\WinSCP.exe,work
+Lightshot,C:\Program Files (x86)\Skillbrains\lightshot\Lightshot.exe,work
+AnyDesk,C:\Program Files (x86)\AnyDesk\AnyDesk.exe,work
+Cisco Webex,C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe,communication
+Paint 3D,C:\Windows\System32\mspaint.exe,work
+ShareX,C:\Program Files\ShareX\ShareX.exe,work
+Cisco Packet Tracer,C:\Program Files\Cisco Packet Tracer 8.0\bin\PacketTracer8.exe,work
+ZoomText,C:\Program Files\ZoomText 2021\ZoomText.exe,work
+XAMPP Control Panel,C:\xampp\xampp-control.exe,work
+Visual Paradigm,C:\Program Files\Visual Paradigm\Visual Paradigm for UML 16.3\Visual Paradigm.exe,work
+Oracle VM VirtualBox,C:\Program Files\Oracle\VirtualBox\VirtualBox.exe,work
+AIDA64,C:\Program Files (x86)\FinalWire\AIDA64 Extreme\aida64.exe,work
+PostgreSQL,C:\Program Files\PostgreSQL\13\bin\pgAdmin4.exe,work
+VMware Workstation,C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe,work
+PyCharm Professional,C:\Program Files\JetBrains\PyCharm 2021.1.1\bin\pycharm64.exe,work
+XMind,C:\Program Files (x86)\XMind\XMind.exe,work
+Axure RP,C:\Program Files\Axure\Axure RP 9\AxureRP.exe,work
+Arduino,C:\Program Files (x86)\Arduino\arduino.exe,work
+Rhinoceros,C:\Program Files\Rhino 7\System\Rhino.exe,work
+SketchUp,C:\Program Files\SketchUp\SketchUp 2021\SketchUp.exe,work
+SolidWorks,C:\Program Files\SOLIDWORKS Corp\SOLIDWORKS\SLDWORKS.exe,work
+Anki,C:\Program Files\Anki\anki.exe,work
+MindManager,C:\Program Files\Mindjet\MindManager 21\MindManager.exe,work
+EndNote,C:\Program Files (x86)\EndNote X9\EndNote.exe,work
+NVivo,C:\Program Files\QSR\NVivo 12\nvivo.exe,work
+Camtasia,C:\Program Files\TechSmith\Camtasia 2021\CamtasiaStudio.exe,work
+Unity,C:\Program Files\Unity\Editor\Unity.exe,work
+AutoCAD,C:\Program Files\Autodesk\AutoCAD 2021\acad.exe,work
+ArcGIS Pro,C:\Program Files\ArcGIS\Pro\bin\ArcGISPro.exe,work
+Bluebeam Revu,C:\Program Files\Bluebeam Software\Bluebeam Revu\Revu.exe,work
+Docker Desktop,C:\Program Files\Docker\Docker\Docker Desktop.exe,work
+MikroTik WinBox,C:\Program Files (x86)\WinBox\winbox.exe,work
+MPLAB X IDE,C:\Program Files (x86)\Microchip\MPLABX\v5.45\mplab_ide\bin\mplab_ide.exe,work
+LaTeX Editor,C:\Program Files (x86)\LEd\LEd.exe,work
+MiKTeX,C:\Program Files\MiKTeX 2.9\miktex\bin\x64\miktex-console.exe,work
+TeXstudio,C:\Program Files (x86)\TeXstudio\texstudio.exe,work
+TortoiseSVN,C:\Program Files\TortoiseSVN\bin\TortoiseProc.exe,work
+Pyzo,C:\Program Files (x86)\Pyzo\pyzo.exe,work
+Racket,C:\Program Files\Racket\racket.exe,work
+Fiddler,C:\Program Files (x86)\Fiddler\Fiddler.exe,work
+Charles,C:\Program Files\Charles\Charles.exe,work
+Putty,C:\Program Files\PuTTY\putty.exe,work
+Bitbucket,C:\Users\username\AppData\Local\Atlassian\SourceTree\SourceTree.exe,work
+Grammarly,C:\Users\username\AppData\Local\Grammarly\Grammarly.exe,work
+LibreOffice Calc,C:\Program Files\LibreOffice\program\scalc.exe,work
+Adobe Acrobat Reader,C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe,work
+Foxit Reader,C:\Program Files (x86)\Foxit Software\Foxit Reader\FoxitReader.exe,work
+Nitro PDF Reader,C:\Program Files\Nitro\Pro\13\NitroPDF.exe,work
+Calibre,C:\Program Files\Calibre2\calibre.exe,work
+Zotero,C:\Program Files (x86)\Zotero\zotero.exe,work
+Evernote,C:\Users\username\AppData\Local\Programs\Evernote\Evernote.exe,work
+Scrivener,C:\Program Files (x86)\Scrivener\Scrivener.exe,work
+Celtx,C:\Program Files\Celtx\Celtx.exe,work
+Final Draft,C:\Program Files (x86)\Final Draft 11\FD.exe,work
+Mendeley,C:\Program Files (x86)\Mendeley Desktop\MendeleyDesktop.exe,work
+Avidemux,C:\Program Files\Avidemux 2.7\avidemux.exe,entertainment
+Shotcut,C:\Program Files\Shotcut\Shotcut.exe,entertainment
+Kdenlive,C:\Program Files\Kdenlive\bin\kdenlive.exe,entertainment
+Lightworks,C:\Program Files\Lightworks\Lightworks.exe,entertainment
+HitFilm Express,C:\Program Files\FXhome\HitFilm Express\HitFilmExpress.exe,entertainment
+Magix Movie Edit Pro,C:\Program Files\MAGIX\Movie Edit Pro Premium\MovieEditPro.exe,entertainment
+Davinci Resolve,C:\Program Files\Blackmagic Design\Davinci Resolve\Resolve.exe,entertainment
+Olive Video Editor,C:\Program Files\Olive\olive.exe,entertainment
+Inkscape,C:\Program Files\Inkscape\inkscape.exe,work
+Affinity Designer,C:\Program Files\Affinity\Designer\designer.exe,work
+CorelDRAW,C:\Program Files\Corel\CorelDRAW Graphics Suite 2021\Programs64\CorelDrw.exe,work
+PaintTool SAI,C:\Program Files\PaintTool SAI\sai.exe,work
+ArtRage,C:\Program Files\Ambient Design\ArtRage 6\ArtRage.exe,work
+Clip Studio Paint,C:\Program Files\CELSYS\Clip Studio Paint\CLIPStudioPaint.exe,work
+Procreate,C:\Program Files\Procreate\Procreate.exe,work
+Medibang Paint,C:\Program Files\Medibang\Paint Pro\MedibangPaintPro.exe,work
+Affinity Photo,C:\Program Files\Affinity\Photo\photo.exe,work
+Corel Painter,C:\Program Files\Corel\Painter 2021\Painter.exe,work
+ZBrush,C:\Program Files\Pixologic\ZBrush 2021\ZBrush.exe,work
+Houdini,C:\Program Files\Side Effects Software\Houdini 18.5\bin\houdini.exe,work
+3ds Max,C:\Program Files\Autodesk\3ds Max 2021\3dsmax.exe,work
+Maya,C:\Program Files\Autodesk\Maya 2021\bin\maya.exe,work
+Cinema 4D,C:\Program Files\Maxon Cinema 4D R23\Cinema 4D.exe,work
+Unreal Engine,C:\Program Files\Epic Games\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe,work
+Godot Engine,C:\Program Files\Godot_v3.2.3-stable_win64.exe,work
+CryEngine,C:\Program Files (x86)\Crytek\CryEngine\Bin64\Sandbox.exe,work
+RPG Maker,C:\Program Files (x86)\RPG Maker VX Ace\RPGVXAce.exe,entertainment
+GameMaker Studio,C:\Program Files\GameMaker Studio 2\GameMakerStudio.exe,entertainment
+Construct 3,C:\Program Files\Scirra\Construct3\Construct3.exe,entertainment
+Stencyl,C:\Program Files\Stencyl\Stencyl.exe,entertainment
+Scratch,C:\Program Files (x86)\Scratch\Scratch.exe,entertainment
+Alice,C:\Program Files (x86)\Alice\Alice.exe,entertainment
+Unity Hub,C:\Program Files\Unity Hub\Unity Hub.exe,work
+Musescore,C:\Program Files\MuseScore 3\bin\MuseScore3.exe,entertainment
+Sibelius,C:\Program Files\Avid\Sibelius\Sibelius.exe,entertainment
+Finale,C:\Program Files\Finale\Finale.exe,entertainment
+Dorico,C:\Program Files\Steinberg\Dorico 3.5\Dorico.exe,entertainment
+Reaper,C:\Program Files\REAPER (x64)\reaper.exe,entertainment
+Ableton Live,C:\Program Files\Ableton\Live 10 Suite\Program\Ableton Live 10 Suite.exe,entertainment
+Pro Tools,C:\Program Files\Avid\Pro Tools\ProTools.exe,entertainment
+Cubase,C:\Program Files\Steinberg\Cubase 11\Cubase11.exe,entertainment
+Studio One,C:\Program Files\PreSonus\Studio One 5\Studio One.exe,entertainment
+Logic Pro,C:\Program Files\Logic Pro\Logic Pro.exe,entertainment
+Reason,C:\Program Files\Reason Studios\Reason 11\Reason.exe,entertainment
+Bitwig Studio,C:\Program Files\Bitwig Studio\Bitwig Studio.exe,entertainment
+GarageBand,C:\Program Files\GarageBand\GarageBand.exe,entertainment
+WavePad,C:\Program Files (x86)\NCH Software\WavePad\wavepad.exe,entertainment
+FLAC Frontend,C:\Program Files\FLAC\FLACFrontend.exe,entertainment
+mp3DirectCut,C:\Program Files (x86)\mp3DirectCut\mp3DirectCut.exe,entertainment
+mp3tag,C:\Program Files (x86)\Mp3tag\Mp3tag.exe,entertainment
+foobar2000,C:\Program Files (x86)\foobar2000\foobar2000.exe,entertainment
+Tidal,C:\Program Files (x86)\TIDAL\TIDAL.exe,entertainment
+Amazon Music,C:\Program Files (x86)\Amazon Music\Amazon Music.exe,entertainment
+YouTube Music,C:\Program Files\YouTube Music\YouTube Music.exe,entertainment
+Deezer,C:\Program Files (x86)\Deezer\Deezer.exe,entertainment
+Google Play Music,C:\Program Files\Google Play Music\Google Play Music.exe,entertainment
+SoundCloud,C:\Program Files\SoundCloud\SoundCloud.exe,entertainment
+Bandcamp,C:\Program Files\Bandcamp\Bandcamp.exe,entertainment
+Pandora,C:\Program Files\Pandora\Pandora.exe,entertainment
+Shazam,C:\Program Files\Shazam\Shazam.exe,entertainment
+SoundHound,C:\Program Files\SoundHound\SoundHound.exe,entertainment
+Midomi,C:\Program Files\Midomi\Midomi.exe,entertainment
+Microsoft PowerPoint,C:\Program Files\Microsoft Office\Office365\POWERPNT.EXE,work
+Microsoft Outlook,C:\Program Files\Microsoft Office\Office365\OUTLOOK.EXE,work
+PDF-XChange Editor,C:\Program Files\Tracker Software\PDF Editor\PDFXEdit.exe,work
+Adobe Lightroom,C:\Program Files\Adobe\Adobe Lightroom Classic\Lightroom.exe,personal
+GIMP,C:\Program Files\GIMP 2\bin\gimp-2.10.exe,personal
+Affinity Photo,C:\Program Files\Affinity\Photo\Photo.exe,personal
+Corel PaintShop Pro,C:\Program Files\Corel\Corel PaintShop Pro 2021\PaintShopPro.exe,personal
+Canva,C:\Program Files (x86)\Canva\Canva.exe,personal
+Procreate,C:\Program Files\Procreate\Procreate.exe,personal
+Krita,C:\Program Files\Krita (x64)\bin\krita.exe,personal
+Autodesk SketchBook,C:\Program Files\Autodesk\Autodesk SketchBook\SketchBook.exe,personal
+Scribus,C:\Program Files\Scribus 1.4.8\Scribus.exe,work
+Microsoft OneNote,C:\Program Files\Microsoft Office\Office365\ONENOTE.EXE,work
+Evernote,C:\Program Files (x86)\Evernote\Evernote.exe,personal
+Notion,C:\Program Files\Notion\Notion.exe,personal
+Microsoft To Do,C:\Program Files\Microsoft To Do\Microsoft To Do.exe,personal
+Trello,C:\Program Files (x86)\Trello\Trello.exe,personal
+Asana,C:\Program Files (x86)\Asana\Asana.exe,work
+Todoist,C:\Program Files\Todoist\Todoist.exe,personal
+Google Keep,C:\Program Files\Google\Keep\GoogleKeep.exe,personal
+Bear,C:\Program Files\Bear\Bear.exe,personal
+Day One,C:\Program Files\Day One\Day One.exe,personal
+Journey,C:\Program Files\Journey\Journey.exe,personal
+Diaro,C:\Program Files\Diaro\Diaro.exe,personal
+Penzu,C:\Program Files\Penzu\Penzu.exe,personal
+Daylio,C:\Program Files\Daylio\Daylio.exe,personal
+Five Minute Journal,C:\Program Files\Five Minute Journal\FiveMinuteJournal.exe,personal
+Grammarly,C:\Program Files\Grammarly\Grammarly.exe,work
+Hemingway Editor,C:\Program Files\Hemingway Editor\Hemingway Editor.exe,work
+Scrivener,C:\Program Files\Scrivener\Scrivener.exe,work
+Final Draft,C:\Program Files\Final Draft\Final Draft.exe,work
+Ulysses,C:\Program Files\Ulysses\Ulysses.exe,work
+yWriter,C:\Program Files\yWriter6\yWriter6.exe,work
+Storyist,C:\Program Files\Storyist\Storyist.exe,work
+SmartEdit Writer,C:\Program Files\SmartEdit Writer\SmartEdit Writer.exe,work
+WriteItNow,C:\Program Files\WriteItNow 5\WriteItNow5.exe,work
+EViews,C:\Program Files (x86)\EViews 11\EViews11.exe,work
+Gephi,C:\Program Files\Gephi-0.9.2\bin\gephi.exe,work
+GraphPad Prism,C:\Program Files\GraphPad\Prism 9\prism.exe,work
+Mendley Desktop,C:\Program Files (x86)\Mendeley Desktop\MendeleyDesktop.exe,work
+Papers,C:\Program Files\Papers\Papers.exe,work
+JabRef,C:\Program Files (x86)\JabRef\JabRef.exe,work
+Khan Academy,C:\Program Files\Khan Academy\KhanAcademy.exe,work
+Coursera,C:\Program Files\Coursera\Coursera.exe,work
+edX,C:\Program Files\edX\edX.exe,work
+Udemy,C:\Program Files\Udemy\Udemy.exe,work
+LinkedIn Learning,C:\Program Files\LinkedIn Learning\LinkedInLearning.exe,work
+Duolingo,C:\Program Files\Duolingo\Duolingo.exe,work
+Rosetta Stone,C:\Program Files\Rosetta Stone\RosettaStone.exe,work
+Babbel,C:\Program Files\Babbel\Babbel.exe,work
+Quizlet,C:\Program Files\Quizlet\Quizlet.exe,work
+Memrise,C:\Program Files\Memrise\Memrise.exe,work
+Brainscape,C:\Program Files\Brainscape\Brainscape.exe,work
+StudyBlue,C:\Program Files\StudyBlue\StudyBlue.exe,work
+RemNote,C:\Program Files\RemNote\RemNote.exe,work
+Google Classroom,C:\Program Files\Google Classroom\GoogleClassroom.exe,work
+Microsoft Teams for Education,C:\Program Files\Microsoft Teams for Education\Teams.exe,work
+Canvas,C:\Program Files\Canvas\Canvas.exe,work
+Blackboard Learn,C:\Program Files\Blackboard\Blackboard.exe,work
+Moodle,C:\Program Files\Moodle\Moodle.exe,work
+Schoology,C:\Program Files\Schoology\Schoology.exe,work
+ClassDojo,C:\Program Files\ClassDojo\ClassDojo.exe,work
+Edmodo,C:\Program Files\Edmodo\Edmodo.exe,work
+Seesaw,C:\Program Files\Seesaw\Seesaw.exe,work
+Zoom for Education,C:\Program Files\Zoom for Education\Zoom.exe,work
+Cisco Webex for Education,C:\Program Files\Cisco Webex for Education\Webex.exe,work
+Google Meet for Education,C:\Program Files\Google Meet for Education\Meet.exe,work
+BigBlueButton,C:\Program Files\BigBlueButton\BigBlueButton.exe,work
+Adobe Connect for Education,C:\Program Files\Adobe Connect for Education\AdobeConnect.exe,work
+Socrative,C:\Program Files\Socrative\Socrative.exe,work
+Kahoot!,C:\Program Files\Kahoot\Kahoot.exe,work
+Nearpod,C:\Program Files\Nearpod\Nearpod.exe,work
+Padlet,C:\Program Files\Padlet\Padlet.exe,work
+Flipgrid,C:\Program Files\Flipgrid\Flipgrid.exe,work
+Pear Deck,C:\Program Files\Pear Deck\PearDeck.exe,work
+Poll Everywhere,C:\Program Files\Poll Everywhere\PollEverywhere.exe,work
+Classcraft,C:\Program Files\Classcraft\Classcraft.exe,work
+Gimkit,C:\Program Files\Gimkit\Gimkit.exe,work
+Quizizz,C:\Program Files\Quizizz\Quizizz.exe,work
+Edpuzzle,C:\Program Files\Edpuzzle\Edpuzzle.exe,work
+ThingLink,C:\Program Files\ThingLink\ThingLink.exe,work
+Google Earth,C:\Program Files\Google Earth\GoogleEarth.exe,work
+GeoGebra,C:\Program Files\GeoGebra\GeoGebra.exe,work
+Stellarium,C:\Program Files\Stellarium\Stellarium.exe,work
+Celestia,C:\Program Files\Celestia\Celestia.exe,work
+Starry Night,C:\Program Files\Starry Night\StarryNight.exe,work
+WorldWind,C:\Program Files\WorldWind\WorldWind.exe,work
+Microsoft Mathematics,C:\Program Files\Microsoft Mathematics\MicrosoftMathematics.exe,work
+Wolfram Alpha,C:\Program Files\Wolfram Alpha\WolframAlpha.exe,work
+Desmos,C:\Program Files\Desmos\Desmos.exe,work
+PhET Interactive Simulations,C:\Program Files\PhET\PhET.exe,work
+Algodoo,C:\Program Files\Algodoo\Algodoo.exe,work
+Simulink,C:\Program Files\Simulink\Simulink.exe,work
+SPARKvue,C:\Program Files\SPARKvue\SPARKvue.exe,work
+Logger Pro,C:\Program Files\Vernier\Logger Pro 3\LoggerPro.exe,work
+Vernier Graphical Analysis,C:\Program Files\Vernier\Graphical Analysis\GraphicalAnalysis.exe,work
+LabQuest Viewer,C:\Program Files\Vernier\LabQuest Viewer\LabQuestViewer.exe,work
+Microsoft OneNote,C:\Program Files\Microsoft Office\Office16\ONENOTE.EXE,work
+Evernote,C:\Program Files (x86)\Evernote\Evernote.exe,work
+Notion,C:\Program Files\Notion\Notion.exe,work
+Google Keep,C:\Program Files\Google\Keep\GoogleKeep.exe,work
+Bear,C:\Program Files\Bear\Bear.exe,work
+Simplenote,C:\Program Files\Simplenote\Simplenote.exe,work
+Trello,C:\Program Files (x86)\Trello\Trello.exe,work
+Todoist,C:\Program Files\Todoist\Todoist.exe,work
+Microsoft To Do,C:\Program Files\Microsoft To Do\Microsoft To Do.exe,work
+Google Tasks,C:\Program Files\Google Tasks\GoogleTasks.exe,work
+Quip,C:\Program Files\Quip\Quip.exe,work
+Zoho Notebook,C:\Program Files\Zoho Notebook\ZohoNotebook.exe,work
+Boostnote,C:\Program Files\Boostnote\Boostnote.exe,work
+Obsidian,C:\Program Files\Obsidian\Obsidian.exe,work
+Roam Research,C:\Program Files\Roam Research\RoamResearch.exe,work
+Logseq,C:\Program Files\Logseq\Logseq.exe,work
+Typora,C:\Program Files\Typora\Typora.exe,work
+ProWritingAid,C:\Program Files\ProWritingAid\ProWritingAid.exe,work
+Ginger Software,C:\Program Files\Ginger Software\Ginger.exe,work
+WhiteSmoke,C:\Program Files\WhiteSmoke\WhiteSmoke.exe,work
+Slick Write,C:\Program Files\Slick Write\SlickWrite.exe,work
+Microsoft Word,C:\Program Files\Microsoft Office\Office16\WINWORD.EXE,work
+Google Docs,C:\Program Files\Google\Docs\GoogleDocs.exe,work
+OpenOffice Writer,C:\Program Files (x86)\OpenOffice 4\program\swriter.exe,work
+WPS Office Writer,C:\Program Files (x86)\Kingsoft\WPS Office\10.2.0.5871\wps.exe,work
+Zoho Writer,C:\Program Files\Zoho Writer\ZohoWriter.exe,work
+OnlyOffice,C:\Program Files\ONLYOFFICE\DesktopEditors\DesktopEditors.exe,work
+Overleaf,C:\Program Files\Overleaf\Overleaf.exe,work
+LyX,C:\Program Files (x86)\LyX 2.3\bin\lyx.exe,work
+Spotify,C:\Program Files\Spotify\Spotify.exe,entertainment
+Apple Music,C:\Program Files\Apple Music\AppleMusic.exe,entertainment
+YouTube Music,C:\Program Files\YouTube Music\YouTubeMusic.exe,entertainment
+Amazon Music,C:\Program Files\Amazon Music\AmazonMusic.exe,entertainment
+Deezer,C:\Program Files\Deezer\Deezer.exe,entertainment
+Tidal,C:\Program Files\Tidal\Tidal.exe,entertainment
+Last.fm,C:\Program Files\Last.fm\Lastfm.exe,entertainment
+iHeartRadio,C:\Program Files\iHeartRadio\iHeartRadio.exe,entertainment
+TuneIn Radio,C:\Program Files\TuneIn Radio\TuneInRadio.exe,entertainment
+Audials One,C:\Program Files\Audials\AudialsOne\AudialsOne.exe,entertainment
+Winamp,C:\Program Files (x86)\Winamp\winamp.exe,entertainment
+AIMP,C:\Program Files (x86)\AIMP\AIMP.exe,entertainment
+MediaMonkey,C:\Program Files (x86)\MediaMonkey\MediaMonkey.exe,entertainment
+MusicBee,C:\Program Files (x86)\MusicBee\MusicBee.exe,entertainment
+JetAudio,C:\Program Files (x86)\JetAudio\JetAudio.exe,entertainment
+Groove Music,C:\Program Files\Groove Music\GrooveMusic.exe,entertainment
+Google Play Music,C:\Program Files\Google Play Music\GooglePlayMusic.exe,entertainment
+Musixmatch,C:\Program Files\Musixmatch\Musixmatch.exe,entertainment
+Audacity,C:\Program Files\Audacity\audacity.exe,entertainment
+FL Studio,C:\Program Files\Image-Line\FL Studio\FL.exe,entertainment
+Ableton Live,C:\Program Files\Ableton\Live 10 Suite\Ableton Live 10 Suite.exe,entertainment
+Cubase,C:\Program Files\Steinberg\Cubase\Cubase.exe,entertainment
+Reaper,C:\Program Files\REAPER\reaper.exe,entertainment
+Studio One,C:\Program Files\PreSonus\Studio One\Studio One.exe,entertainment
+Reason,C:\Program Files\Reason Studios\Reason\Reason.exe,entertainment
+Bitwig Studio,C:\Program Files\Bitwig Studio\BitwigStudio.exe,entertainment
+Tracktion,C:\Program Files\Tracktion\Tracktion.exe,entertainment
+Ardour,C:\Program Files\Ardour\Ardour.exe,entertainment
+Mixcraft,C:\Program Files\Acoustica\Mixcraft\Mixcraft.exe,entertainment
+Cakewalk by BandLab,C:\Program Files\Cakewalk\Cakewalk Core\Cakewalk.exe,entertainment
+LMMS,C:\Program Files\LMMS\LMMS.exe,entertainment
+Audition,C:\Program Files\Adobe\Adobe Audition\Audition.exe,entertainment
+Nuendo,C:\Program Files\Steinberg\Nuendo\Nuendo.exe,entertainment
+Waveform Free,C:\Program Files\Tracktion\Waveform Free\Waveform.exe,entertainment
+Soundtrap,C:\Program Files\Soundtrap\Soundtrap.exe,entertainment
+Ohm Studio,C:\Program Files\Ohm Force\Ohm Studio\OhmStudio.exe,entertainment
+BandLab,C:\Program Files\BandLab\BandLab.exe,entertainment
+GarageBand for Windows,C:\Program Files\GarageBand for Windows\GarageBand.exe,entertainment
+Soundation,C:\Program Files\Soundation\Soundation.exe,entertainment
+Audiotool,C:\Program Files\Audiotool\Audiotool.exe,entertainment
+BeepBox,C:\Program Files\BeepBox\BeepBox.exe,entertainment
+SoundBridge,C:\Program Files\SoundBridge\SoundBridge.exe,entertainment
+Sonic Pi,C:\Program Files\Sonic Pi\SonicPi.exe,entertainment
+WavePad Sound Editor,C:\Program Files\NCH Software\WavePad\wavepad.exe,entertainment
+DJ Pro Mixer,C:\Program Files\DJ Pro Mixer\DJProMixer.exe,entertainment
+VirtualDJ,C:\Program Files\VirtualDJ\virtualdj.exe,entertainment
+Serato DJ Pro,C:\Program Files\Serato\DJ Pro\SeratoDJPro.exe,entertainment
+Traktor Pro,C:\Program Files\Native Instruments\Traktor Pro\Traktor.exe,entertainment
+Rekordbox,C:\Program Files\Pioneer\Rekordbox\Rekordbox.exe,entertainment
+Mixxx,C:\Program Files\Mixxx\Mixxx.exe,entertainment
+DJUCED,C:\Program Files\DJUCED\DJUCED.exe,entertainment
+Cross DJ,C:\Program Files\Cross DJ\CrossDJ.exe,entertainment
+Zulu DJ Software,C:\Program Files\NCH Software\Zulu\zulu.exe,entertainment
+Kra Mixer,C:\Program Files\Kra Mixer\KraMixer.exe,entertainment
+Kanto Karaoke,C:\Program Files\Kanto Karaoke\KantoKaraoke.exe,entertainment
+KaraFun Player,C:\Program Files\KaraFun Player\KaraFunPlayer.exe,entertainment
+Siglos Karaoke Professional,C:\Program Files\Siglos Karaoke Professional\SiglosKaraokePro.exe,entertainment
+PCDJ Karaoke,C:\Program Files\PCDJ Karaoke\PCDJKaraoke.exe,entertainment
+Yokee Karaoke,C:\Program Files\Yokee Karaoke\YokeeKaraoke.exe,entertainment
+Karaoke 5,C:\Program Files\Karaoke 5\Karaoke5.exe,entertainment
+VanBasco's Karaoke Player,C:\Program Files\VanBasco's Karaoke Player\vanBasco.exe,entertainment
+Karaoke Builder Studio,C:\Program Files\Karaoke Builder Studio\KaraokeBuilderStudio.exe,entertainment
+Karafun Studio,C:\Program Files\Karafun Studio\KarafunStudio.exe,entertainment
+Guitar Pro,C:\Program Files\Guitar Pro\GuitarPro.exe,entertainment
+TuxGuitar,C:\Program Files\TuxGuitar\TuxGuitar.exe,entertainment
+Power Tab Editor,C:\Program Files\Power Tab Editor\PowerTabEditor.exe,entertainment
+MuseScore,C:\Program Files\MuseScore\MuseScore.exe,entertainment
+Sibelius,C:\Program Files\Sibelius\Sibelius.exe,entertainment
+Dorico,C:\Program Files\Steinberg\Dorico\Dorico.exe,entertainment
+Noteflight,C:\Program Files\Noteflight\Noteflight.exe,entertainment
+Flat,C:\Program Files\Flat\Flat.exe,entertainment
+ScoreCloud,C:\Program Files\ScoreCloud\ScoreCloud.exe,entertainment
+FORTE,C:\Program Files\FORTE\FORTE.exe,entertainment
+Overture,C:\Program Files\Sonic Scores\Overture\Overture.exe,entertainment
+Crescendo,C:\Program Files\NCH Software\Crescendo\crescendo.exe,entertainment
+LilyPond,C:\Program Files\LilyPond\usr\bin\lilypond.exe,entertainment
+Finale NotePad,C:\Program Files\Finale NotePad\FinaleNotePad.exe,entertainment
+Encore,C:\Program Files\Encore\Encore.exe,entertainment
+Harmony Assistant,C:\Program Files\Harmony Assistant\HarmonyAssistant.exe,entertainment
+Guitar Tabs,C:\Program Files\Guitar Tabs\GuitarTabs.exe,entertainment
+Chords!,C:\Program Files\Chords!\Chords!.exe,entertainment
+Songsterr,C:\Program Files\Songsterr\Songsterr.exe,entertainment
+Ultimate Guitar Tabs,C:\Program Files\Ultimate Guitar Tabs\UltimateGuitarTabs.exe,entertainment
+Band-in-a-Box,C:\Program Files\Band-in-a-Box\bbw.exe,entertainment
+Impro-Visor,C:\Program Files\Impro-Visor\Impro-Visor.exe,entertainment
+iReal Pro,C:\Program Files\iReal Pro\iRealPro.exe,entertainment
+Google Chrome,C:\Program Files\Google\Chrome\Application\chrome.exe,personal
+Mozilla Firefox,C:\Program Files\Mozilla Firefox\firefox.exe,personal
+Microsoft Edge,C:\Program Files\Microsoft\Edge\Application\msedge.exe,personal
+Safari,C:\Program Files\Safari\Safari.exe,personal
+Opera,C:\Program Files\Opera\launcher.exe,personal
+Brave Browser,C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe,personal
+Vivaldi,C:\Program Files\Vivaldi\Application\vivaldi.exe,personal
+Tor Browser,C:\Program Files\Tor Browser\Browser\firefox.exe,personal
+Maxthon Browser,C:\Program Files\Maxthon\Maxthon.exe,personal
+UC Browser,C:\Program Files\UCBrowser\Application\UCBrowser.exe,personal
+Epic Privacy Browser,C:\Program Files\Epic Privacy Browser\Application\epic.exe,personal
+Waterfox,C:\Program Files\Waterfox\waterfox.exe,personal
+Pale Moon,C:\Program Files\Pale Moon\palemoon.exe,personal
+Avant Browser,C:\Program Files\Avant Browser\avant.exe,personal
+Slimjet,C:\Program Files\Slimjet\slimjet.exe,personal
+Midori,C:\Program Files\Midori\midori.exe,personal
+Falkon,C:\Program Files\Falkon\falkon.exe,personal
+Qutebrowser,C:\Program Files\Qutebrowser\qutebrowser.exe,personal
+GNU IceCat,C:\Program Files\GNU IceCat\icecat.exe,personal
+Konqueror,C:\Program Files\Konqueror\konqueror.exe,personal
+Netscape Navigator,C:\Program Files\Netscape\Navigator\navigator.exe,personal
+DuckDuckGo Privacy Browser,C:\Program Files\DuckDuckGo Privacy Browser\duckduckgo.exe,personal
+Microsoft Internet Explorer,C:\Program Files\Internet Explorer\iexplore.exe,personal
+WhatsApp,C:\Program Files\ApplicationFrameHost.exe,entertainment
