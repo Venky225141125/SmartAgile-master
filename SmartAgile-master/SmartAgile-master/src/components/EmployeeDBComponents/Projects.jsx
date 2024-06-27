@@ -63,7 +63,7 @@ const ProjectStatusDashboard = () => {
         ))}
       </div>
       <div className='bg-white rounded-2xl shadow-2xl mt-8'>
-          <h2>hel</h2>
+          
         </div>
       </div>
     </div>

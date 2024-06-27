@@ -10,10 +10,9 @@ import { TransitionGroup } from 'react-transition-group';
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import 'tailwindcss/tailwind.css';
-import { ChartContainer } from '@mui/x-charts/ChartContainer';
-import { BarPlot } from '@mui/x-charts/BarChart';
+
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, Label, ResponsiveContainer,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList, Label, ResponsiveContainer,
 } from 'recharts';
 
 
@@ -245,7 +244,7 @@ const ProgressBarChart = () => {
         </YAxis>
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="uv" fill="url(#colorUv)" barSize={40} radius={[50, 50, 50, 0]}>
+        <Bar dataKey="uv" fill="url(#colorUv)" barSize={40} radius={[50, 50, 0, 0]}>
           <LabelList dataKey="uv" position="top" />
         </Bar>
       </BarChart>

@@ -1,51 +1,101 @@
 import { PieChart } from '@mui/x-charts/PieChart';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import React, { useState} from 'react';
+import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { FiPlay, FiPause, FiCheck } from 'react-icons/fi'; // Importing some icons from react-icons
 import 'tailwindcss/tailwind.css';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-
+import { Box, CardMedia, CardContent, Typography, IconButton, bottomNavigationActionClasses } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Card from 'react-bootstrap/Card';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const EHome = () => {
 
   return (
-    <div className='bg-gray-100 flex flex-col'>
-        <div className='grid grid-cols-6'>
-            <KCard title='Desktime' content={'141h 39m'}/>
-            <KCard title='Time At Work' content={'197h 57m'}/>
-            <KCard title='Offline Time' content={<div className='text-3xl text-red-500'>8h 20m</div>}/>
-            <KCard title='Projects Time' content={'2h 57m'}/>
-            <KCard title='Effectiveness' content={'48.76%'}/>
-            <KCard title='Productivity' content={'77.1%'}/>
+    <div className='flex flex-wrap gap-y-3'>
+    <div className='flex flex-nowrap gap-x-2'>
+        <div className='shadow-xl'>
+            <Card border="primary" style={{ width: '11.5rem' }}>
+                <Card.Header><p className='ml-4 mt-3 text-sm'>Desktop Time</p></Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <p className='font-semibold text-2xl ml-4'>20h 20m</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
+        </div>
+        <div className='shadow-xl'>
+            <Card border="primary" style={{ width: '11.5rem' }}>
+                <Card.Header><p className='ml-4 mt-3 text-sm'>Time At Work</p></Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <p className='font-semibold text-2xl ml-4'>15h 40m</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
+        </div>
+        <div className='shadow-xl'>
+            <Card border="primary" style={{ width: '11.5rem' }}>
+                <Card.Header><p className='ml-4 mt-3 text-sm'>Offline Time</p></Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <p className='font-semibold text-2xl ml-4'>2h 13m</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
+        </div>
+        <div className='shadow-xl'>
+            <Card border="primary" style={{ width: '11.5rem' }}>
+                <Card.Header><p className='ml-4 mt-3 text-sm'>Projects Time</p></Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <p className='font-semibold text-2xl ml-4'>3h 12m</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
+        </div>
+        <div className='shadow-xl'>
+            <Card border="primary" style={{ width: '11.5rem' }}>
+                <Card.Header><p className='ml-4 mt-3 text-sm'>Effectiveness</p></Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <p className='font-semibold text-2xl ml-4'>53.3%</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
+        </div>
+        <div className='shadow-xl'>
+            <Card border="primary" style={{ width: '11.5rem' }}>
+                <Card.Header><p className='ml-4 mt-3 text-sm'>Productivity</p></Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <p className='font-semibold text-2xl ml-4'>72.54%</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
+        </div>
         </div>
         <div className='flex flex-nowrap grid-cols-3 gap-x-4'>
           <ProjectTasks/>
           <ProductivityChart/>
-          <Attendance/>
-        </div>
-        <div className='flex flex-nowrap grid-cols-2'>
-          <EmployeeActivity/>
           <ScheduleCard/>
         </div>
+        <div className='flex flex-nowrap grid-cols-2 gap-4'>
+          <EmployeeActivity/>
+          
+        </div>
+    
     </div>
   )
 }
-const KCard = ({ title, content }) => {
-    return (
-      <div className="border rounded-lg p-4 w-40 h-24 m-2 shadow-lg flex flex-col justify-between transition-shadow duration-300 hover:shadow-xl">
-      <h4 className="text-base font-bold mb-2">{title}</h4>
-      <div className="flex-grow flex items-center text-xl justify-center text-green-700">
-        {content}
-      </div>
-    </div>
-    );
-  };
   const data = [
     { id: 0, value: 75, label: 'Productive' },
     { id: 1, value: 15, label: 'Unassigned' },
@@ -54,7 +104,7 @@ const KCard = ({ title, content }) => {
   
 const Productivity=()=>{
   return(
-    <div className='justify-center rounded-lg transition-shadow duration-300 hover:shadow-xl'>
+    <div className='justify-center bg-white rounded-lg transition-shadow duration-300 hover:shadow-xl'>
       <b>Productivity</b>
       <PieChart
       series={[
@@ -75,6 +125,7 @@ const Productivity=()=>{
       height={200}
       width={350}
     />
+    
     </div>
   );
 }
@@ -90,7 +141,8 @@ const tasksData = [
 
 const ScheduleCard = () => {
   return (
-    <div className="max-w-sm bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div className="max-w-sm bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl ">
+      <Attendance/>
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-4">Schedule</h2>
         <div className="mb-4 flex items-center">
@@ -109,25 +161,31 @@ const ScheduleCard = () => {
         </div>
         <button className="w-full bg-blue-500 text-white py-2 mt-4 rounded-lg">Set Reminder</button>
       </div>
+      <Productivity/>
     </div>
   );
 };
 const Attendance=()=>{
   return (
     <div>
-      <div className='bg-white h-28 rounded-lg w-98'>
-      <b>Attendance</b><br/>
-      <table className="table-auto h-20 border-collapse border border-gray-400">
-        <tbody>
-          <tr>
-            <td className="border border-gray-300 w-32 text-center">Attendance<br/><b>28</b></td>
-            <td className="border border-gray-300 w-24 text-center">Absent<br/><b>1</b></td>
-            <td className="border border-gray-300 w-24 text-center">Late<br/><b>1</b></td>
-          </tr>
-        </tbody>
-      </table>
+      <div className='bg-white h-20 rounded-lg w-98 border'>
+      <b className='text-2xl ml-2'>Attendance</b><br/>
+      <div className='flex gap-x-0.5 mt-2'>
+      <div className='w-1/3 bg-slate-50 rounded-2xl ml-3'>
+        <p className='ml-2'>Attendance</p>
+        <p className='text-center font-semibold'>28</p>
+      </div>
+      <div className='w-1/3 bg-slate-50 rounded-2xl'>
+        <p className='ml-2'>Absent</p>
+        <p className='ml-2'>1</p>
+      </div>
+      <div className='w-1/3 bg-slate-50 rounded-2xl mr-2'>
+        <p className='ml-2'>Late</p>
+        <p className='ml-2'>1</p>
+      </div>
+      </div>
       </div><br/>
-      <EmpOnLeave/>
+      
     </div>
   );
 };
@@ -191,35 +249,74 @@ const screenshots = [
   { title: "Slack", time: "14:36", task: "A/B Testing", name: "Elizabeth Ferguson", department: "UX/UI Design", imageUrl: "/path/to/slack.png" }
 ];
 
+const scrollContainerStyle = {
+  display: 'flex',
+  overflowX: 'auto',
+  scrollBehavior: 'smooth',
+  padding: '10px 0',
+  width: '700px', // Width set to accommodate 3 cards at a time
+};
+
+const cardStyle = {
+  minWidth: 220,
+  margin: '0 10px',
+  boxShadow: 3,
+};
+
 const EmployeeActivity = () => {
+  const scrollRef = React.useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' }); // Scroll by one card width
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' }); // Scroll by one card width
+    }
+  };
+
   return (
-    <div className="flex flex-nowrap justify-center">
-      {screenshots.map((screenshot, index) => (
-        <Card key={index} sx={{ maxWidth: 300, margin: 0.5, boxShadow: 3 }}>
-          <CardMedia
-            sx={{ height: 140 }}
-            image={screenshot.imageUrl}
-            title={screenshot.title}
-          />
-          <CardContent>
-            <Typography variant="h6" component="div">
-              {screenshot.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="div">
-              {screenshot.time} - {screenshot.task}
-            </Typography>
-            <Typography variant="body2" component="div">
-              {screenshot.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="div">
-              {screenshot.department}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+    <div className='bg-white rounded-lg my-4 ml-4'>
+      <p className='text-2xl font-semibold mb-2'>Recent Activity</p>
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <IconButton onClick={scrollLeft}>
+          <ArrowBackIosIcon />
+        </IconButton>
+        <Box sx={scrollContainerStyle} ref={scrollRef}>
+          {screenshots.map((screenshot, index) => (
+            <Card key={index} sx={cardStyle}>
+              <CardMedia
+                sx={{ height: 140 }}
+                image={screenshot.imageUrl}
+                title={screenshot.title}
+              />
+              <CardContent>
+                <Typography variant="h6" component="div">
+                  {screenshot.title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="div">
+                  {screenshot.time} - {screenshot.task}
+                </Typography>
+                <Typography variant="body2" component="div">
+                  {screenshot.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="div">
+                  {screenshot.department}
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
+        <IconButton onClick={scrollRight}>
+          <ArrowForwardIosIcon />
+        </IconButton>
+      </Box>
     </div>
   );
-}
+};
 
 const ProductivityChart = () => {
   const data = {
@@ -244,9 +341,11 @@ const ProductivityChart = () => {
 
   const options = {
     responsive: true,
+    
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        
       },
       tooltip: {
         callbacks: {
@@ -266,9 +365,9 @@ const ProductivityChart = () => {
   };
 
   return (
-    <div className="p-4 w-72 bg-white rounded-xl shadow-md space-y-4">
-      <h2 className="text-2xl font-bold">Top Apps and Websites Chart</h2>
-      <Pie data={data} options={options} />
+    <div className="p-4 w-84 bg-white rounded-xl shadow-md space-y-4 justify-center">
+      <h2 className="text-xl font-bold">Top Apps and Websites Chart</h2>
+      <Pie data={data} options={options} width={450} height={450}/>
       <div className="flex flex-col space-y-2">
         <div className="flex items-center">
           <div className="w-3 h-3 bg-green-400 mr-2"></div>
@@ -337,7 +436,7 @@ const TaskCard = ({ task }) => {
 
 const ProjectTasks = () => {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md max-w-md mx-auto ml-2">
+    <div className="p-6 bg-white rounded-lg shadow-md w-84 ml-1">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-gray-900">Project 1</h2>
         <select className="text-sm text-gray-600 border-gray-300 rounded">
@@ -346,7 +445,7 @@ const ProjectTasks = () => {
         </select>
       </div>
       <div className="flex justify-between items-center mb-4">
-        <button className="text-sm font-medium text-purple-600 border border-purple-600 rounded px-4 py-2">
+        <button className="text-sm w-15 h-10 text-purple-600 border border-purple-600 rounded mr-3">
           Add New Task
         </button>
         <div className="relative">
@@ -372,7 +471,6 @@ const ProjectTasks = () => {
     </div>
   );
 };
-
 
 
 export default EHome;
