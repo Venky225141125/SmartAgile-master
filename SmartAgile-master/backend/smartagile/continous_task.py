@@ -148,7 +148,9 @@ def track_application_usage(user_id):
         CREATE TABLE IF NOT EXISTS application_openings_count{table_suffix} (
             ID SERIAL PRIMARY KEY,
             ApplicationName TEXT UNIQUE,
-            OpenCount INT
+            OpenCount INT,
+            Date DATE,
+            UNIQUE (ApplicationName,Date)
         )
     """)
     conn.commit()
