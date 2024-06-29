@@ -18,9 +18,44 @@ import Attendance from './Attendance';
 import Projects from './Projects';
 import AppsWebsites from './AppsWebsites';
 import Settings from './Settings';
-
+import { useNavigate } from 'react-router-dom';
 const EmployeeDashboard = () => {
   const user=JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const handleLogout = async() => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/logout/', {}, {
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken'),  // Assuming you have a function to get the CSRF token
+          },
+      });
+      if (response.status === 200) {
+          // Handle successful logout (e.g., redirect to login page, clear user state)
+          console.log('Successfully logged out');
+          navigate('/login');
+      }
+  } catch (error) {
+      console.error('Error during logout', error);
+  }
+      
+  };
+  const getCookie = (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+};
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
