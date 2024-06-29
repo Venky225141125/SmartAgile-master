@@ -13,9 +13,44 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import SHome from './SHome';
-
-
+import { useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import axios from 'axios';
 const SprintDashboard = () => {
+  const navigate = useNavigate();
+  const handleLogout = async() => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/logout/', {}, {
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken'),  // Assuming you have a function to get the CSRF token
+          },
+      });
+      if (response.status === 200) {
+          // Handle successful logout (e.g., redirect to login page, clear user state)
+          console.log('Successfully logged out');
+          navigate('/login');
+      }
+  } catch (error) {
+      console.error('Error during logout', error);
+  }
+      
+  };
+  const getCookie = (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+};
   const user=JSON.parse(localStorage.getItem("user"));
   return (
     <Box sx={{ display: 'flex' }}>
@@ -32,13 +67,14 @@ const SprintDashboard = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             SmartAgile
           </Typography>
-          <IconButton color="inherit">
-            <MailIcon />
-          </IconButton>
+          
+          <Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />
+          <IconButton color="inherit" onClick={handleLogout}>
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <div className='mt-8'>
@@ -113,4 +149,3 @@ function VerticalTabs() {
 }
 
 export default SprintDashboard;
-
