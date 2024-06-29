@@ -18,7 +18,15 @@ from django.contrib.auth import authenticate, login
 from .models import SignupData
 from .serializers import SignupDataSerializer
 from .continous_task import start_continous_task,stop_continous_task
-
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout
+@csrf_exempt
+def logout_view(request):
+    if request.method == 'POST':
+        stop_continous_task()
+        logout(request)
+        return JsonResponse({'message': 'Successfully logged out'}, status=200)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
