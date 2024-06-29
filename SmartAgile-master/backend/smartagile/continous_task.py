@@ -11,12 +11,7 @@ import joblib
 import logging
 import pandas as pd
 
-rf_model_path = os.path.join(os.path.dirname(__file__), 'models', 'rf_model.pkl')
-rf_model = joblib.load(rf_model_path)
-svm_model_path=os.path.join(os.path.dirname(__file__), 'models', 'svm_pipeline.pkl')
-svm_model=joblib.load(svm_model_path)
-app_vectorizer_model_path=os.path.join(os.path.dirname(__file__), 'models', 'app_vectorizer.pkl')
-app_model=joblib.load(app_vectorizer_model_path)
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')  # Replace 'backend.settings' with your project settings module
 import django
 django.setup()
@@ -160,6 +155,9 @@ def track_application_usage(user_id):
 
     mouse_listener.start()
     keyboard_listener.start()
+    rf_model_path = os.path.join(os.path.dirname(__file__), 'models', 'rf_model.pkl')
+    svm_model_path=os.path.join(os.path.dirname(__file__), 'models', 'svm_pipeline.pkl')
+    app_vectorizer_model_path=os.path.join(os.path.dirname(__file__), 'models', 'app_vectorizer.pkl')
     loaded_pipeline = joblib.load(svm_model_path)
     vectorizer_app = joblib.load(app_vectorizer_model_path)
     model = joblib.load(rf_model_path)
