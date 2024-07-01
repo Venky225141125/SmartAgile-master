@@ -16,7 +16,7 @@ import AdminDashboard from "./components/AdminDBComponents/AdminDashboard";
 import LandingPage from "./components/LandingPage.js";
 import LoginPage from "./components/LoginPage.js";
 import PasswordReset from "./components/PasswordReset.js";
-import EmployeeProfiles from "./components/EmployeeProfiles.js";
+import EmployeeProfiles from "./components/EmployeeDBComponents/EmployeeProfiles.js";
 
 function App() {
   return (
@@ -35,7 +35,8 @@ function App() {
         <Route path="/group/dashboard" element={<GroupDashboard />} />
         <Route path="/admin/sprint-dashboard" element={<SprintDashboard />} />
         <Route path="/admin/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/employee-profiles" element={<EmployeeProfiles />} />
+        <Route path="/employee-profiles" element={<EmployeeProfiles />} />
+        
 
         {/* Add other routes as needed */}
       </Routes>

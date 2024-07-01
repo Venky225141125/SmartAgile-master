@@ -1,0 +1,26 @@
+/* pie-chart.module.css */
+.tooltip {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+.slice {
+    transition: transform 0.3s;
+  }
+  
+  .slice:hover {
+    transform: scale(1.1);
+  }
+  
+  .hasHighlight {
+    opacity: 0.7;
+  }
+  
+  .container {
+    cursor: pointer;
+  }
+  

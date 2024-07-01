@@ -20,14 +20,12 @@ const Tasks = () => {
   return (
     <div className='flex flex-wrap'>
       <TaskList/>
-      
       <KanbanBoard/>
-      
     </div>
   )
 }
 
-const FRUITS = [
+const TASKS = [
   'Task1',
   'Task2',
   'Task3',
@@ -35,7 +33,7 @@ const FRUITS = [
   'Task5',
 ];
 
-function renderItem({ item, handleRemoveFruit }) {
+function renderItem({ item, handleRemoveTask }) {
   return (
     <ListItem
       secondaryAction={
@@ -43,7 +41,7 @@ function renderItem({ item, handleRemoveFruit }) {
           edge="end"
           aria-label="delete"
           title="Delete"
-          onClick={() => handleRemoveFruit(item)}
+          onClick={() => handleRemoveTask(item)}
         >
           <DeleteIcon />
         </IconButton>
@@ -56,25 +54,25 @@ function renderItem({ item, handleRemoveFruit }) {
 
 
 const TaskList=()=> {
-  const [fruitsInBasket, setFruitsInBasket] = React.useState(FRUITS.slice(0, 3));
+  const [tasks, setTasks] = React.useState(TASKS.slice(0, 3));
 
-  const handleAddFruit = () => {
-    const nextHiddenItem = FRUITS.find((i) => !fruitsInBasket.includes(i));
+  const handleAddTask = () => {
+    const nextHiddenItem = tasks.find((i) => !TASKS.includes(i));
     if (nextHiddenItem) {
-      setFruitsInBasket((prev) => [nextHiddenItem, ...prev]);
+      setTasks((prev) => [nextHiddenItem, ...prev]);
     }
   };
 
-  const handleRemoveFruit = (item) => {
-    setFruitsInBasket((prev) => [...prev.filter((i) => i !== item)]);
+  const handleRemoveTask = (item) => {
+    setTasks((prev) => [...prev.filter((i) => i !== item)]);
   };
   
 
   const addTaskButton = (
     <Button
       variant="contained"
-      disabled={fruitsInBasket.length >= FRUITS.length}
-      onClick={handleAddFruit}
+      disabled={tasks.length >= TASKS.length}
+      onClick={handleAddTask}
     >
       Add New Task
     </Button>
@@ -86,8 +84,8 @@ const TaskList=()=> {
       <b className='mr-20'>My Tasks</b>{addTaskButton}
       <List sx={{ mt: 0.5 }}>
         <TransitionGroup>
-          {fruitsInBasket.map((item) => (
-            <Collapse key={item}>{renderItem({ item, handleRemoveFruit })}</Collapse>
+          {tasks.map((item) => (
+            <Collapse key={item}>{renderItem({ item, handleRemoveTask })}</Collapse>
           ))}
         </TransitionGroup>
       </List>

@@ -22,6 +22,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import React,{ useState, useEffect ,useRef  } from 'react';
 import { Switch } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, MenuItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 const EmployeeDashboard = () => {
@@ -32,6 +35,41 @@ const EmployeeDashboard = () => {
     
     navigate('/login');
   };
+  const [anchorEl, setAnchorEl] = useState(null);
+    const location = useLocation();
+    const currentPath = location.pathname;
+  
+    const handleMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+    };
+
+  
+    const menuItems = [
+      { text: ' Sprint Dashboard ', path: '/admin/sprint-dashboard' },
+      { text: ' Admin Dashboard', path: '/admin/admin-dashboard' },
+      { text: ' Group Dashboard', path: '/group/dashboard' },
+      { text: ' Employee Dashboard ', path: '/employee/dashboard' },
+    ];
+    const [anchorE2, setAnchorE2] = useState(null);
+    const handleMenuOpen1 = (event) => {
+      setAnchorE2(event.currentTarget);
+    };
+  
+    const handleMenuClose1 = () => {
+      setAnchorE2(null);
+    };
+    const menuItemsOne = [
+      { text: ' Profile', path: '/employee-profiles' },
+      { text: ' Settings', path: '/admin/admin-dashboard' },
+      { text: ' Logout', path: '/group/dashboard' },
+      
+    ];
+
+  
   
   return (
     <Box sx={{ display: 'flex' }}>
@@ -45,13 +83,56 @@ const EmployeeDashboard = () => {
         }}
       >
         <Toolbar>
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenuOpen}>
+          <MenuIcon />
+        </IconButton>
+        <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {menuItems.map((item) => (
+          item.path !== currentPath && (
+            <MenuItem
+              component={Link}
+              to={item.path}
+              onClick={handleMenuClose}
+              key={item.text}
+            >
+              {item.text}
+            </MenuItem>
+          )
+        ))}
+      </Menu>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             SmartAgile
           </Typography>
           <Typography variant="h6" noWrap sx={{ flexGrow: 20 }}>
             <Timer/>
           </Typography>
+          <Typography>
+          <IconButton edge="start" color="inherit" aria-label="menu"  onClick={handleMenuOpen1}>
           <Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />
+          </IconButton>
+          <Menu
+        anchorE2={anchorE2}
+        open={Boolean(anchorE2)}
+        onClose={handleMenuClose1}
+      >
+        {menuItemsOne.map((item) => (
+          item.path !== currentPath && (
+            <MenuItem
+              component={Link}
+              to={item.path}
+              onClick={handleMenuClose1}
+              key={item.text}
+            >
+              {item.text}
+            </MenuItem>
+          )
+        ))}
+      </Menu>
+      </Typography>
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
@@ -98,7 +179,7 @@ const VerticalTabs = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <Box
@@ -149,9 +230,10 @@ const VerticalTabs = () => {
           <Tab icon={<ProjectIcon />} label="Projects" {...a11yProps(3)} />
           <Tab icon={<AppsIcon />} label="Apps & Websites" {...a11yProps(4)} />
           <Tab icon={<SettingsIcon />} label="Settings" {...a11yProps(5)} />
+          
         </Tabs>
       </Box>
-      <Box sx={{ flexGrow: 1, ml: 6}}>
+      <Box sx={{ flexGrow: 1, ml: 6 ,mt:2}}>
         <TabPanel value={value} index={0}>
           <EHome />
         </TabPanel>
@@ -170,6 +252,7 @@ const VerticalTabs = () => {
         <TabPanel value={value} index={5}>
           <Settings />
         </TabPanel>
+        
       </Box>
     </Box>
   );
