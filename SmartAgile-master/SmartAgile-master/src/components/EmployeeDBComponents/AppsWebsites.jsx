@@ -115,7 +115,6 @@ const EmployeeActivityTable = () => {
       fetchData();
     }
   };
-};
 
   const applyDateFilter = () => {
     fetchData();
@@ -124,6 +123,7 @@ const EmployeeActivityTable = () => {
   if (loading) {
     return <CircularProgress />;
   }
+
   const filteredData = dateFilter === "Custom"
     ? data.filter(row => new Date(row.date) >= new Date(startDate) && new Date(row.date) <= new Date(endDate))
     : data.filter(row => {
@@ -143,6 +143,7 @@ const EmployeeActivityTable = () => {
           return true;
       }
     });
+
   return (
     <Box className="p-1 w-auto">
       <Box className="flex justify-end mb-4">
@@ -198,7 +199,7 @@ const EmployeeActivityTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, index) => (
+            {filteredData.map((row, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Box className="flex items-center">

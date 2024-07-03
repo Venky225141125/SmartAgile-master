@@ -1,14 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom"; // Correctly import from react-router-dom
-import Login from "./components/Login.js";
 import AdminLogin from "./components/AdminLogin.js";
-import Signup from "./components/Signup.js";
-import Header from "./components/Header";
-import Content from "./components/Content";
+import EmployeeLogin from "./components/EmployeeLogin.js";
 import About from "./components/About.js";
-import DataCheck from "./components/data.js";
 import ForgotPassword from "./components/Forgotpassword";
-import UserProfile from "./components/UserProfile";
 import EmployeeDashboard from "./components/EmployeeDBComponents/EmployeeDashboard";
 import GroupDashboard from "./components/GroupDBComponents/GroupDashboard";
 import SprintDashboard from "./components/SprintDBComponents/SprintDashboard";
@@ -25,9 +20,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/loging" element={<Login />} />
+        <Route path="/employeelogin" element={<EmployeeLogin />} />
         <Route path="/about" element={<About />} />
-        <Route path="/signup" element={<Signup />} />
 
         <Route path="/forget/resetpassword" element={<PasswordReset />} />
         <Route path="/forget" element={<ForgotPassword />} />
