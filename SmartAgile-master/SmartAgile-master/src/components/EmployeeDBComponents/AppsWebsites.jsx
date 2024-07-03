@@ -111,6 +111,8 @@ const EmployeeActivityTable = () => {
 
   const handleDateFilterChange = (event) => {
     setDateFilter(event.target.value);
+    if (event.target.value !== "Custom") {
+      fetchData();
   };
 
   const applyDateFilter = () => {
@@ -120,7 +122,25 @@ const EmployeeActivityTable = () => {
   if (loading) {
     return <CircularProgress />;
   }
+  const filteredData = dateFilter === "Custom"
+    ? data.filter(row => new Date(row.date) >= new Date(startDate) && new Date(row.date) <= new Date(endDate))
+    : data.filter(row => {
+      const rowDate = new Date(row.date);
+      const today = new Date();
+      const yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
+      const thisWeekStart = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
 
+      switch (dateFilter) {
+        case "Today":
+          return rowDate.toDateString() === today.toDateString();
+        case "Yesterday":
+          return rowDate.toDateString() === yesterday.toDateString();
+        case "This Week":
+          return rowDate >= thisWeekStart && rowDate <= new Date(thisWeekStart.getFullYear(), thisWeekStart.getMonth(), thisWeekStart.getDate() + 6);
+        default:
+          return true;
+      }
+    });
   return (
     <Box className="p-1 w-auto">
       <Box className="flex justify-end mb-4">

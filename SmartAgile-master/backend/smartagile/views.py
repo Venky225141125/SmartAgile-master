@@ -53,7 +53,15 @@ class AppData(View):
             table_name = f'application_usage_{user.id}'
 
             with connection.cursor() as cursor:
-                cursor.execute(f"SELECT applicationname, category, duration FROM {table_name}")
+                cursor.execute(f"""
+                    SELECT 
+                        applicationname, 
+                        category, 
+                        SUM(duration) as duration, 
+                        date
+                    FROM {table_name}
+                    GROUP BY applicationname, category, date
+                """)
                 data = cursor.fetchall()
 
             data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2]} for row in data]
