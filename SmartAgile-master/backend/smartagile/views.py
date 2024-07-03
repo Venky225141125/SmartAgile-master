@@ -6,6 +6,7 @@ import traceback
 from django.core import validators
 from backend import settings
 import random
+from django.views import View
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ObjectDoesNotExist
 from email.mime.text import MIMEText
@@ -18,69 +19,16 @@ from django.contrib.auth import authenticate, login
 from .models import SignupData
 from .serializers import SignupDataSerializer
 from .continous_task import start_continous_task,stop_continous_task
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import logout
-
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-
-#@method_decorator(csrf_exempt, name='dispatch')
 from django.http import JsonResponse
-from django.views import View
+from datetime import date, timedelta
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.core import validators
-from .models import SignupData
-from django.db import connection
-import logging
-#application_usage_15
-logger = logging.getLogger(__name__)
+from django.contrib.auth.hashers import make_password
+from .models import SignupData  # Import the model
+import traceback
 
-@method_decorator(csrf_exempt, name='dispatch')
-class AppData(View):
-    def post(self, request):
-        try:
-            email = request.POST.get('email')
 
-            if not email:
-                return Response({'error': 'Email is required'}, status=400)
-            
-            validators.validate_email(email)  # Validate email format
-            user = SignupData.objects.filter(email=email).first()
-
-            if not user:
-                return JsonResponse({'error': 'User not found'}, status=404)
-
-            table_name = f'application_usage_{user.id}'
-
-            with connection.cursor() as cursor:
-                cursor.execute(f"""
-                    SELECT 
-                        applicationname, 
-                        category, 
-                        SUM(duration) as duration, 
-                        date
-                    FROM {table_name}
-                    GROUP BY applicationname, category, date
-                """)
-                data = cursor.fetchall()
-
-            data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2]} for row in data]
-
-            return JsonResponse(data_list, safe=False)
-
-        except validators.ValidationError as e:
-            logger.error(f"Validation error: {e}")
-            return JsonResponse({'error': 'Invalid email format'}, status=400)
-        except Exception as e:
-            logger.error(f"Unexpected error: {e}")
-            return JsonResponse({'error': 'An unexpected error occurred'}, status=500)
-@csrf_exempt
-def logout_view(request):
-    if request.method == 'POST':
-        stop_continous_task()
-        logout(request)
-        return JsonResponse({'message': 'Successfully logged out'}, status=200)
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
@@ -101,7 +49,7 @@ class LoginView(APIView):
         start_continous_task(user_data.id)
         # Serialize user data
         serializer = SignupDataSerializer(user_data)
-        return Response({'message': 'Login successful.', 'user': serializer.data}, status=status.HTTP_200_OK)
+        return Response({'message': 'Login successful.', 'user': serializer.data,}, status=status.HTTP_200_OK)
 
     def ensure_user_tables(self, user_id):
         table_suffix = f"_{user_id}"
@@ -146,9 +94,7 @@ class LoginView(APIView):
                 CREATE TABLE IF NOT EXISTS application_openings_count{table_suffix} (
                     ID SERIAL PRIMARY KEY,
                     ApplicationName TEXT UNIQUE,
-                    OpenCount INT,
-                    Date DATE,
-                    UNIQUE (ApplicationName,Date)
+                    OpenCount INT
                 )
             """)
         
@@ -224,12 +170,6 @@ class ForgotPasswordView(APIView):
             server.login(smtp_username, smtp_password)
             server.sendmail(sender_email, receiver_email, msg.as_string())
 
-from django.core.exceptions import ObjectDoesNotExist
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.contrib.auth.hashers import make_password
-from .models import SignupData  # Import the model
-import traceback
 
 class ResetPasswordView(APIView):
     def post(self, request):
@@ -261,3 +201,126 @@ class ResetPasswordView(APIView):
         except Exception as e:
             traceback.print_exc()
             return Response({'error': str(e)}, status=500)
+        
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+#@method_decorator(csrf_exempt, name='dispatch')
+from django.http import JsonResponse
+from django.views import View
+from rest_framework.response import Response
+from django.core import validators
+from .models import SignupData
+from django.db import connection
+import logging
+from django.db import connection
+from django.utils import timezone
+from datetime import timedelta
+from django.http import JsonResponse
+from django.core import validators
+from django.utils.dateparse import parse_date
+#application_usage_15
+logger = logging.getLogger(__name__)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AppData(View):
+    def post(self, request):
+        try:
+            email = request.POST.get('email')
+            
+            if not email:
+                return Response({'error': 'Email is required'}, status=400)
+            
+            validators.validate_email(email)  # Validate email format
+            user = SignupData.objects.filter(email=email).first()
+
+            if not user:
+                return JsonResponse({'error': 'User not found'}, status=404)
+
+            table_name = f'application_usage_{user.id}'
+
+            with connection.cursor() as cursor:
+                cursor.execute(f"""
+                    SELECT 
+                        applicationname, 
+                        category, 
+                        SUM(duration) as duration, 
+                        date
+                    FROM {table_name}
+                    GROUP BY applicationname, category, date
+                """)
+                data = cursor.fetchall()
+
+            data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2], 'date':row[3]} for row in data]
+
+            return JsonResponse(data_list, safe=False)
+
+        except validators.ValidationError as e:
+            logger.error(f"Validation error: {e}")
+            return JsonResponse({'error': 'Invalid email format'}, status=400)
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return JsonResponse({'error': 'An unexpected error occurred'}, status=500)
+
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout
+@csrf_exempt
+def logout_view(request):
+    if request.method == 'POST':
+        stop_continous_task()
+        logout(request)
+        return JsonResponse({'message': 'Successfully logged out'}, status=200)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+# class AppData(View):
+#     def post(self, request):
+#         try:
+#             email = request.POST.get('email')
+#             date_filter = request.POST.get('dateFilter')
+#             start_date = request.POST.get('startDate')
+#             end_date = request.POST.get('endDate')
+
+#             if not email:
+#                 return JsonResponse({'error': 'Email is required'}, status=400)
+            
+#             validators.validate_email(email)  # Validate email format
+#             user = SignupData.objects.filter(email=email).first()
+
+#             if not user:
+#                 return JsonResponse({'error': 'User not found'}, status=404)
+
+#             table_name = f'application_usage_{user.id}'
+
+#             # Default date filter is today
+#             date_query = f"DATE(timestamp) = '{timezone.now().date()}'"
+
+#             if date_filter == 'Yesterday':
+#                 date_query = f"DATE(timestamp) = '{(timezone.now() - timedelta(days=1)).date()}'"
+#             elif date_filter == 'This Week':
+#                 start_of_week = timezone.now() - timedelta(days=timezone.now().weekday())
+#                 date_query = f"DATE(timestamp) >= '{start_of_week.date()}'"
+#             elif date_filter == 'Custom':
+#                 if not start_date or not end_date:
+#                     return JsonResponse({'error': 'Both startDate and endDate are required for custom date filter'}, status=400)
+                
+#                 start_date_parsed = parse_date(start_date)
+#                 end_date_parsed = parse_date(end_date)
+                
+#                 if not start_date_parsed or not end_date_parsed:
+#                     return JsonResponse({'error': 'Invalid date format'}, status=400)
+                
+#                 date_query = f"DATE(timestamp) BETWEEN '{start_date_parsed}' AND '{end_date_parsed}'"
+
+#             with connection.cursor() as cursor:
+#                 cursor.execute(f"SELECT applicationname, category, duration FROM {table_name} WHERE {date_query}")
+#                 data = cursor.fetchall()
+
+#             data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2]} for row in data]
+
+#             return JsonResponse(data_list, safe=False)
+
+#         except validators.ValidationError as e:
+#             logger.error(f"Validation error: {e}")
+#             return JsonResponse({'error': 'Invalid email format'}, status=400)
+#         except Exception as e:
+#             logger.error(f"Unexpected error: {e}")
+#             return JsonResponse({'error': 'An unexpected error occurred'}, status=500)
