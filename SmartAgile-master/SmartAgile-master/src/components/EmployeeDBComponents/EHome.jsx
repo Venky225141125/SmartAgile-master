@@ -1,5 +1,4 @@
 import { PieChart } from '@mui/x-charts/PieChart';
-import { Pie } from 'react-chartjs-2';
 import { FiPlay, FiPause, FiCheck } from 'react-icons/fi'; // Importing some icons from react-icons
 import 'tailwindcss/tailwind.css';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -14,7 +13,7 @@ import TimerOffOutlinedIcon from '@mui/icons-material/TimerOffOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { bottom, right } from '@popperjs/core';
+import { bottom, left, right } from '@popperjs/core';
 import React, { useMemo, useRef } from "react";
 import * as d3 from "d3";
 import styles from "./pie-chart.module.css";
@@ -23,6 +22,8 @@ import DescriptionSharpIcon from '@mui/icons-material/DescriptionSharp';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'; 
 import CodeSharpIcon from '@mui/icons-material/CodeSharp'; 
+import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -149,10 +150,7 @@ const EHome = () => {
           <ProductivityChart/>
           <Attendance/>
         </div>
-        <div className='flex flex-nowrap grid-cols-2 gap-4'>
-          <EmployeeActivity/>
-        </div>
-    
+        <EmployeeActivity/>
     </div>
   )
 }
@@ -243,15 +241,48 @@ const Attendance=()=>{
           </div>
         </div><br/>
         <div>
-        <div className='bg-white rounded-xl shadow-md space-y-4 justify-center'>
+      <div className='bg-white rounded-xl shadow-md justify-center'>
+      <Gauge
+      value={73.26}
+      startAngle={-110}
+      endAngle={110}
+      margin={
+        {
+          left:50
+        }
+      }
+      sx={{
+        [`& .${gaugeClasses.valueText}`]: {
+          fontSize: 20,
+          transform: 'translate(0px, 0px)',
+        },
+      }}
+      width={250}
+      height={200}
+      text={
+        ({ value}) => `${value}% \nworked`
+      }
+    />
+    <div class="grid grid-cols-3 divide-x mt-2 ml-4">
+      <div className='ml-4'>
+        <p className='ml-2'>At Work</p>
+        <p className='text-center font-semibold'>6h 25min</p>
+      </div>
+      <div className='ml-4'>
+        <p className='ml-2'>Idle</p>
+        <p className='ml-2'>2h 5m</p>
+      </div>
+      <div className='ml-4'>
+        <p className='ml-2'>offline</p>
+        <p className='ml-2'>...</p>
+      </div>
+    </div>
+      </div>
+      <div className='bg-white rounded-xl shadow-md space-y-4 justify-center mt-4'>
         <ScheduleCard/>
       </div>
-      
     </div>
     </div>
-    
-    
-    
   );
 };
 const employees = [
@@ -344,8 +375,8 @@ const EmployeeActivity = () => {
   };
 
   return (
-    <div className='bg-white rounded-lg mt-2 mb-1 ml-4'>
-      <p className='text-2xl font-semibold mb-2'>Recent Activity</p>
+    <div className='bg-white rounded-lg ml-4 -mt-32'>
+      <p className='text-2xl font-semibold'>Recent Activity</p>
       <Box display="flex" alignItems="center" justifyContent="center">
         <IconButton onClick={scrollLeft}>
           <ArrowBackIosIcon />
@@ -447,7 +478,7 @@ const TaskCard = ({ task }) => {
 
 const ProjectTasks = () => {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md w-96 ml-1">
+    <div className="p-6 bg-white rounded-lg shadow-md w-96 ml-1 h-fit">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-gray-900">Project 1</h2>
       </div>
