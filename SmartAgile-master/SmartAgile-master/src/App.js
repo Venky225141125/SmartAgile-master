@@ -4,6 +4,7 @@ import AdminLogin from "./components/AdminLogin.js";
 import EmployeeLogin from "./components/EmployeeLogin.js";
 import About from "./components/About.js";
 import ForgotPassword from "./components/Forgotpassword";
+import EmployeeProfile from "./components/EmployeeProfile";
 import EmployeeDashboard from "./components/EmployeeDBComponents/EmployeeDashboard";
 import GroupDashboard from "./components/GroupDBComponents/GroupDashboard";
 import SprintDashboard from "./components/SprintDBComponents/SprintDashboard";
@@ -22,9 +23,9 @@ function App() {
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/employeelogin" element={<EmployeeLogin />} />
         <Route path="/about" element={<About />} />
-
-        <Route path="/forget/resetpassword" element={<PasswordReset />} />
-        <Route path="/forget" element={<ForgotPassword />} />
+        <Route path="/employeeprofile" element={<EmployeeProfile />} />
+        <Route path="/passwordreset" element={<PasswordReset />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
         <Route path="/group/dashboard" element={<GroupDashboard />} />
         <Route path="/admin/sprint-dashboard" element={<SprintDashboard />} />

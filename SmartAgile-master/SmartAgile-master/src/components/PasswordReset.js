@@ -72,7 +72,7 @@ const PasswordResetForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
+    <div className="passwordreset min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
         <img src={logo} alt="Logo" className="mx-auto mb-4 w-24 h-24" />
         <h1 className="text-2xl mb-4 text-center font-bold">Reset Password</h1>
