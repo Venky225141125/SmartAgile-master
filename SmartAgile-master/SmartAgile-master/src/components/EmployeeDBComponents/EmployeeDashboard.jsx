@@ -48,7 +48,6 @@ const EmployeeDashboard = () => {
   }
       
   };
-<<<<<<< HEAD
   const [anchorEl, setAnchorEl] = useState(null);
     const location = useLocation();
     const currentPath = location.pathname;
@@ -82,9 +81,6 @@ const EmployeeDashboard = () => {
       { text: ' Logout', path: '/group/dashboard' },
       
     ];
-
-  
-=======
   const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -100,7 +96,6 @@ const EmployeeDashboard = () => {
     }
     return cookieValue;
 };
->>>>>>> 82056e77703ca2c2347e710dd7d2092fe4b63d79
   
   return (
     <Box sx={{ display: 'flex' }}>
