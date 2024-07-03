@@ -9,14 +9,14 @@ import About from "./components/About.js";
 import DataCheck from "./components/data.js";
 import ForgotPassword from "./components/Forgotpassword";
 import UserProfile from "./components/UserProfile";
-import Employee from "./components/Employee";
-import EmployeeDashboard from "./Dashboards/EmployeeDBComponent/EmployeeDashboard";
-import GroupDashboard from "./Dashboards/GroupDBComponent/GroupDashboard";
-import SprintDashboard from "./Dashboards/SprintDBComponents/SprintDashboard";
+import EmployeeDashboard from "./components/EmployeeDBComponents/EmployeeDashboard";
+import GroupDashboard from "./components/GroupDBComponents/GroupDashboard";
+import SprintDashboard from "./components/SprintDBComponents/SprintDashboard";
+import AdminDashboard from "./components/AdminDBComponents/AdminDashboard";
 import LandingPage from "./components/LandingPage.js";
 import LoginPage from "./components/LoginPage.js";
 import PasswordReset from "./components/PasswordReset.js";
-import EmployeeProfiles from "./components/EmployeeProfiles.js";
+import EmployeeProfiles from "./components/EmployeeDBComponents/EmployeeProfiles.js";
 
 function App() {
   return (
@@ -34,7 +34,9 @@ function App() {
         <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
         <Route path="/group/dashboard" element={<GroupDashboard />} />
         <Route path="/admin/sprint-dashboard" element={<SprintDashboard />} />
-        <Route path="/admin/employee-profiles" element={<EmployeeProfiles />} />
+        <Route path="/admin/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/employee-profiles" element={<EmployeeProfiles />} />
+        
 
         {/* Add other routes as needed */}
       </Routes>

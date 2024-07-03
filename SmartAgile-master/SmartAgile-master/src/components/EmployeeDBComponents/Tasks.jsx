@@ -10,10 +10,9 @@ import { TransitionGroup } from 'react-transition-group';
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import 'tailwindcss/tailwind.css';
-import { ChartContainer } from '@mui/x-charts/ChartContainer';
-import { BarPlot } from '@mui/x-charts/BarChart';
+
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, Label, ResponsiveContainer,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList, Label, ResponsiveContainer,
 } from 'recharts';
 
 
@@ -21,14 +20,12 @@ const Tasks = () => {
   return (
     <div className='flex flex-wrap'>
       <TaskList/>
-      
       <KanbanBoard/>
-      
     </div>
   )
 }
 
-const FRUITS = [
+const TASKS = [
   'Task1',
   'Task2',
   'Task3',
@@ -36,7 +33,7 @@ const FRUITS = [
   'Task5',
 ];
 
-function renderItem({ item, handleRemoveFruit }) {
+function renderItem({ item, handleRemoveTask }) {
   return (
     <ListItem
       secondaryAction={
@@ -44,7 +41,7 @@ function renderItem({ item, handleRemoveFruit }) {
           edge="end"
           aria-label="delete"
           title="Delete"
-          onClick={() => handleRemoveFruit(item)}
+          onClick={() => handleRemoveTask(item)}
         >
           <DeleteIcon />
         </IconButton>
@@ -57,25 +54,25 @@ function renderItem({ item, handleRemoveFruit }) {
 
 
 const TaskList=()=> {
-  const [fruitsInBasket, setFruitsInBasket] = React.useState(FRUITS.slice(0, 3));
+  const [tasks, setTasks] = React.useState(TASKS.slice(0, 3));
 
-  const handleAddFruit = () => {
-    const nextHiddenItem = FRUITS.find((i) => !fruitsInBasket.includes(i));
+  const handleAddTask = () => {
+    const nextHiddenItem = tasks.find((i) => !TASKS.includes(i));
     if (nextHiddenItem) {
-      setFruitsInBasket((prev) => [nextHiddenItem, ...prev]);
+      setTasks((prev) => [nextHiddenItem, ...prev]);
     }
   };
 
-  const handleRemoveFruit = (item) => {
-    setFruitsInBasket((prev) => [...prev.filter((i) => i !== item)]);
+  const handleRemoveTask = (item) => {
+    setTasks((prev) => [...prev.filter((i) => i !== item)]);
   };
   
 
   const addTaskButton = (
     <Button
       variant="contained"
-      disabled={fruitsInBasket.length >= FRUITS.length}
-      onClick={handleAddFruit}
+      disabled={tasks.length >= TASKS.length}
+      onClick={handleAddTask}
     >
       Add New Task
     </Button>
@@ -87,8 +84,8 @@ const TaskList=()=> {
       <b className='mr-20'>My Tasks</b>{addTaskButton}
       <List sx={{ mt: 0.5 }}>
         <TransitionGroup>
-          {fruitsInBasket.map((item) => (
-            <Collapse key={item}>{renderItem({ item, handleRemoveFruit })}</Collapse>
+          {tasks.map((item) => (
+            <Collapse key={item}>{renderItem({ item, handleRemoveTask })}</Collapse>
           ))}
         </TransitionGroup>
       </List>
@@ -245,7 +242,7 @@ const ProgressBarChart = () => {
         </YAxis>
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="uv" fill="url(#colorUv)" barSize={40} radius={[50, 50, 50, 0]}>
+        <Bar dataKey="uv" fill="url(#colorUv)" barSize={40} radius={[50, 50, 0, 0]}>
           <LabelList dataKey="uv" position="top" />
         </Bar>
       </BarChart>

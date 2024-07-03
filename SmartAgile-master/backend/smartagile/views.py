@@ -20,6 +20,60 @@ from .serializers import SignupDataSerializer
 from .continous_task import start_continous_task,stop_continous_task
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout
+
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+#@method_decorator(csrf_exempt, name='dispatch')
+from django.http import JsonResponse
+from django.views import View
+from rest_framework.response import Response
+from django.core import validators
+from .models import SignupData
+from django.db import connection
+import logging
+#application_usage_15
+logger = logging.getLogger(__name__)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AppData(View):
+    def post(self, request):
+        try:
+            email = request.POST.get('email')
+
+            if not email:
+                return Response({'error': 'Email is required'}, status=400)
+            
+            validators.validate_email(email)  # Validate email format
+            user = SignupData.objects.filter(email=email).first()
+
+            if not user:
+                return JsonResponse({'error': 'User not found'}, status=404)
+
+            table_name = f'application_usage_{user.id}'
+
+            with connection.cursor() as cursor:
+                cursor.execute(f"""
+                    SELECT 
+                        applicationname, 
+                        category, 
+                        SUM(duration) as duration, 
+                        date
+                    FROM {table_name}
+                    GROUP BY applicationname, category, date
+                """)
+                data = cursor.fetchall()
+
+            data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2]} for row in data]
+
+            return JsonResponse(data_list, safe=False)
+
+        except validators.ValidationError as e:
+            logger.error(f"Validation error: {e}")
+            return JsonResponse({'error': 'Invalid email format'}, status=400)
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return JsonResponse({'error': 'An unexpected error occurred'}, status=500)
 @csrf_exempt
 def logout_view(request):
     if request.method == 'POST':
