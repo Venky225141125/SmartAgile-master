@@ -114,12 +114,8 @@ const EmployeeActivityTable = () => {
     if (event.target.value !== "Custom") {
       fetchData();
     }
-<<<<<<< HEAD
 
-};
-=======
   };
->>>>>>> d92affdbb20c2a480c1b6852c798a7baf1ca6518
 
   const applyDateFilter = () => {
     fetchData();
