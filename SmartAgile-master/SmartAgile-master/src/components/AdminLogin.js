@@ -74,7 +74,6 @@ const AdminLogin = () => {
         <h1 className="text-2xl mb-4 text-center font-bold">Admin Login</h1>
         <img src={logo} alt="Logo" className="mx-auto mb-4 w-24 h-24" /> {/* Replace 'path/to/logo.png' with the actual path to your logo */}
         <form onSubmit={handleSubmit}>
-          <h3 className="text-center">Admin Login</h3>
           <div className="mb-2">
             <label htmlFor="email">Email</label>
             <input
