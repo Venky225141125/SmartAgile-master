@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/smartagilelogo.png';
 
-const AdminLogin = () => {
+const EmployeeLogin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,9 +22,9 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
+    <div className="employeelogin min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
-        <h1 className="text-2xl mb-4 text-center font-bold">Admin Login</h1>
+        <h1 className="text-2xl mb-4 text-center font-bold">Employee Login</h1>
         <img src={logo} alt="Logo" className="mx-auto mb-4 w-24 h-24" /> {/* Replace 'path/to/logo.png' with the actual path to your logo */}
         <div className="mb-4">
           <input
@@ -59,4 +59,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default EmployeeLogin;
