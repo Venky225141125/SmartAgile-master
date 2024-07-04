@@ -71,10 +71,9 @@ const EmployeeLogin = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
-        <h1 className="text-2xl mb-4 text-center font-bold">Admin Login</h1>
+        <h1 className="text-2xl mb-4 text-center font-bold">Employee Login</h1>
         <img src={logo} alt="Logo" className="mx-auto mb-4 w-24 h-24" /> {/* Replace 'path/to/logo.png' with the actual path to your logo */}
         <form onSubmit={handleSubmit}>
-          <h3 className="text-center">Employee Login</h3>
           <div className="mb-2">
             <label htmlFor="email">Email</label>
             <input
