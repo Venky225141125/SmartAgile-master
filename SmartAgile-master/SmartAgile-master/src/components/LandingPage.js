@@ -1,31 +1,127 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { teal } from '@mui/material/colors';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Slide from '@mui/material/Slide';
+import { TypeAnimation } from 'react-type-animation'; // Import TypeAnimation
+import './landing.css'; // Make sure to adjust the path if necessary
 
-const LandingPage = () => {
+const App = () => {
   return (
-
-    <div className="min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col items-center text-black">
-      <nav className="w-full shadow p-4 flex justify-between items-center">
-      <img src=".\src\components\logo.jpg" alt="SmartAgile" className="w-24 h-24 rounded-full mb-4" />
-        <div className='text-black'>
-          <Link to="/" className="mx-2 ">Home</Link>
-          <Link to="/about" className="mx-2 ">About Us</Link>
-          <Link to="/signup" className="mx-2 text-teal-800">Register</Link>
-          <Link to="/login" className="mx-2 text-teal-800">Login</Link>
+    
+    <div className="relative w-full h-screen custom-bg overflow-hidden text-white flex">
+      <div className=" h-full gradient-overlay w-1/2">
+        <BasicTabs />
+        <div className='ml-2'>
+          <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 50 }}>SmartAgile</h1>
+          <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 25 }}>AI-Driven tool for optimal workplace productivity</h1>
+          <div className='mt-10'>
+            <Animate />
+          </div>
+          <div className='w-96 border-l-2 border-x-neutral-400'>
+            <p className="mt-3 mb-3 ml-2 ">Utilizing advanced AI, it accurately distinguishes between work-related and non-work activities on employee devices.</p>
+          </div>
         </div>
-      </nav>
-      <header className="text-center mt-12">
-        <h1 className="text-4xl font-bold ">Smart Agile</h1>
-        <p className="mt-4 text-lg ">AI-Driven Tool for Optimal Workplace Productivity</p>
-        <p className="mt-2 ">Utilizing advanced AI, it accurately distinguishes between work-related and non-work activities on employee devices.</p>
-        <div className="mt-8">
-        <Link to="/login" className="text-lg text-white bg-green-900 px-6 py-3 rounded-lg">Get Started</Link>
-      </div></header>
+      </div>
+      <div className='w-1/2'>
+      <SimpleSlide/>
     </div>
-
-
-
+    </div>
+    
+    
   );
 };
 
-export default LandingPage;
+const BasicTabs = () => {
+  return (
+    <nav className="shadow p-2 flex justify-center items-center bg-white ml-48 mr-48 h-fit rounded-3xl mt-1 mb-10">
+      <div className='text-black'>
+        <Link to="/" className='mx-2'>Home</Link>
+        <Link to="/about" className="mx-2 ">About Us</Link>
+        <Link to="/signup" className="mx-2">Register</Link>
+        <Link to="/login" className="mx-2 ">Login</Link>
+      </div>
+      <GetStart />
+    </nav>
+  );
+};
+
+const Animate = () => {
+  return (
+    <TypeAnimation
+      sequence={[
+        'AI-Powered Activity Analysis',
+        1000,
+        'Agile Integration',
+        1000,
+        'Real-Time Productivity Insights',
+        1000,
+        'Privacy-Compliant Monitoring',
+        1000,
+        'Customizabe Dashboards',
+        1000,
+        'Automated Reporting',
+        1000,
+        'Secure Data Handling',
+        1000,
+      ]}
+      wrapper="span"
+      speed={50}
+      style={{ fontSize: '2em', display: 'inline-block' }}
+      repeat={Infinity}
+    />
+  );
+};
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(teal[500]),
+  backgroundColor: teal[500],
+  '&:hover': {
+    backgroundColor: teal[700],
+  },
+}));
+
+const GetStart = () => {
+  const navigate = useNavigate(); // useNavigate inside GetStart component
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
+  return (
+    <Stack spacing={2} direction="row" marginLeft={48} onClick={handleLogin}>
+      <ColorButton variant="contained" >Get Started</ColorButton>
+    </Stack>
+  );
+};
+
+const icon = (
+  <Paper sx={{width: 700, height: 550, marginLeft:72, marginBottom: 2,marginTop:8 }} elevation={4}>
+    <img src="./land2.jpg" alt="Your Image" style={{width:'100%',height:'100%'}} />
+  </Paper>
+);
+
+const SimpleSlide = () => {
+  const [checked, setChecked] = React.useState(true); // Set default to true
+
+  return (
+    <Box
+      sx={{
+        height:700,
+        width:500,
+        position: 'relative',
+        zIndex: 1,
+      }}
+    >
+      <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+        {icon}
+      </Slide>
+    </Box>
+  );
+};
+
+export default App;

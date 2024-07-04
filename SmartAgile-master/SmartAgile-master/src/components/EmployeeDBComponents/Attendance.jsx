@@ -165,9 +165,8 @@ const MyAttendance=()=>{
     {
       data: [
         { id: 0, value: 20, label: 'On time' },
-        { id: 1, value: 3, label: 'Work from home' },
-        { id: 2, value: 5, label: 'Late Attendance' },
-        { id: 3, value: 2, label: 'Absent' },
+        { id: 1, value: 5, label: 'Late Attendance' },
+        { id: 2, value: 6, label: 'Absent' },
       ],
       innerRadius: 30,
       outerRadius: 100,

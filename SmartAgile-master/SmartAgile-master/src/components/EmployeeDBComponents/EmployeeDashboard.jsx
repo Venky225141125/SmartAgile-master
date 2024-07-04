@@ -27,7 +27,7 @@ import { Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const EmployeeDashboard = () => {
-  //const user=JSON.parse(localStorage.getItem("user"));
+  const user=JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
   const handleLogout = () => {
