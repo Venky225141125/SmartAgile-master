@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import logo from "../assets/smartagilelogo.png"; // Adjust path as needed
-import { Link,useNavigate } from "react-router-dom";
-const EmployeeLogin = () => {
+import {Link, useNavigate } from "react-router-dom";
+const AdminLogin = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -71,46 +71,45 @@ const EmployeeLogin = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-400 via-white to-gray-400 flex flex-col justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
-        <h1 className="text-2xl mb-4 text-center font-bold">Admin Login</h1>
+        <h1 className="text-2xl mb-4 text-center font-bold">Employee Login</h1>
         <img src={logo} alt="Logo" className="mx-auto mb-4 w-24 h-24" /> {/* Replace 'path/to/logo.png' with the actual path to your logo */}
         <form onSubmit={handleSubmit}>
-          <h3 className="text-center">Employee Login</h3>
-          <div className="mb-2">
-            <label htmlFor="email">Email</label>
+          <div className="my-6">
             <input
               type="email"
               name="email"
-              placeholder="Enter Email"
+              placeholder="Username"
               className="form-control"
               value={form.email}
               onChange={handleChange}
+              style={{ width: '250px' }}
             />
             {errors.email && (
               <span className="text-danger">{errors.email}</span>
             )}
           </div>
-          <div className="mb-2">
-            <label htmlFor="password">Password</label>
+          <div className="mb-6">
             <input
               type="password"
               name="password"
-              placeholder="Enter Password"
+              placeholder="Password"
               className="form-control"
               value={form.password}
               onChange={handleChange}
+              style={{ width: '250px' }}
             />
             {errors.password && (
               <span className="text-danger">{errors.password}</span>
             )}
           </div>
           {message && <div className="text-center text-danger">{message}</div>}
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign in
+          <div className="flex justify-center items-center">
+            <button type="submit" className="w-48 bg-green-500 text-white py-2 rounded">
+              Login
             </button>
           </div>
           <p className="text-end mt-2">
-            <Link to="/forget">Forgot Password?</Link>
+            <Link to="/forgotpassword">Forgot Password?</Link>
           </p>
         </form>
       </div>
@@ -118,4 +117,4 @@ const EmployeeLogin = () => {
   );
 };
 
-export default EmployeeLogin;
+export default AdminLogin;

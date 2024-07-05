@@ -13,6 +13,7 @@ import LandingPage from "./components/LandingPage.js";
 import LoginPage from "./components/LoginPage.js";
 import PasswordReset from "./components/PasswordReset.js";
 import EmployeeProfiles from "./components/EmployeeDBComponents/EmployeeProfiles.js";
+import SignUp from './components/signup.js'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/signup" element={<SignUp/>}></Route>
         <Route path="/employeelogin" element={<EmployeeLogin />} />
         <Route path="/about" element={<About />} />
         <Route path="/employeeprofile" element={<EmployeeProfile />} />

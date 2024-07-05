@@ -74,43 +74,42 @@ const AdminLogin = () => {
         <h1 className="text-2xl mb-4 text-center font-bold">Admin Login</h1>
         <img src={logo} alt="Logo" className="mx-auto mb-4 w-24 h-24" /> {/* Replace 'path/to/logo.png' with the actual path to your logo */}
         <form onSubmit={handleSubmit}>
-          <h3 className="text-center">Admin Login</h3>
-          <div className="mb-2">
-            <label htmlFor="email">Email</label>
+          <div className="my-6">
             <input
               type="email"
               name="email"
-              placeholder="Enter Email"
+              placeholder="Username"
               className="form-control"
               value={form.email}
               onChange={handleChange}
+              style={{ width: '250px' }}
             />
             {errors.email && (
               <span className="text-danger">{errors.email}</span>
             )}
           </div>
-          <div className="mb-2">
-            <label htmlFor="password">Password</label>
+          <div className="mb-6">
             <input
               type="password"
               name="password"
-              placeholder="Enter Password"
+              placeholder="Password"
               className="form-control"
               value={form.password}
               onChange={handleChange}
+              style={{ width: '250px' }}
             />
             {errors.password && (
               <span className="text-danger">{errors.password}</span>
             )}
           </div>
           {message && <div className="text-center text-danger">{message}</div>}
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign in
+          <div className="flex justify-center items-center">
+            <button type="submit" className="w-48 bg-green-500 text-white py-2 rounded">
+              Login
             </button>
           </div>
           <p className="text-end mt-2">
-            <Link to="/forget">Forgot Password?</Link>
+            <Link to="/forgotpassword">Forgot Password?</Link>
           </p>
         </form>
       </div>

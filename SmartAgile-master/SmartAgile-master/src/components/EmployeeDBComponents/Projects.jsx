@@ -55,16 +55,13 @@ const ProjectStatusDashboard = () => {
               <div className='mr-2'>
               <span className='ml-2'>{task.task}</span>
               </div>
-              <div className={`bg-${task.percent >= 75 ? 'green' : task.percent <= 50 ? 'red' : 'blue'}-500 h-2.5 rounded-full mt-2 justify-end`} style={{ width: `${task.percent}%` }}></div>
+              <div className={`bg-${task.percent >= 75 ? 'green' : task.percent <= 50 ? 'pink' : 'blue'}-500 h-2.5 rounded-full mt-2 justify-end`} style={{ width: `${task.percent}%` }}></div>
               <span>{task.percent}%</span>
             </div>
             
           </div>
         ))}
       </div>
-      <div className='bg-white rounded-2xl shadow-2xl mt-8'>
-          
-        </div>
       </div>
     </div>
   );

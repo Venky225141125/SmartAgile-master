@@ -1,16 +1,12 @@
 import { Box, Tabs, Tab } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import TaskIcon from '@mui/icons-material/Task';
 import AttendanceIcon from '@mui/icons-material/AccessTime';
 import ProjectIcon from '@mui/icons-material/Folder';
 import AppsIcon from '@mui/icons-material/Apps';
-import SettingsIcon from '@mui/icons-material/Settings';
 import EHome from './EHome';
-import Tasks from './Tasks';
 import Attendance from './Attendance';
 import Projects from './Projects';
 import AppsWebsites from './AppsWebsites';
-import Settings from './Settings';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -237,11 +233,11 @@ const VerticalTabs = () => {
           }}
         >
           <Tab icon={<DashboardIcon />} label="Dashboard" {...a11yProps(0)} />
-          <Tab icon={<TaskIcon />} label="Tasks" {...a11yProps(1)} />
-          <Tab icon={<AttendanceIcon />} label="Attendance" {...a11yProps(2)} />
-          <Tab icon={<ProjectIcon />} label="Projects" {...a11yProps(3)} />
-          <Tab icon={<AppsIcon />} label="Apps & Websites" {...a11yProps(4)} />
-          <Tab icon={<SettingsIcon />} label="Settings" {...a11yProps(5)} />
+          {/*<Tab icon={<TaskIcon />} label="Tasks" {...a11yProps(1)} />*/}
+          <Tab icon={<AttendanceIcon />} label="Attendance" {...a11yProps(1)} />
+          <Tab icon={<ProjectIcon />} label="Projects" {...a11yProps(2)} />
+          <Tab icon={<AppsIcon />} label="Apps & Websites" {...a11yProps(3)} />
+          {/*<Tab icon={<SettingsIcon />} label="Settings" {...a11yProps(5)} />*/}
           
         </Tabs>
       </Box>
@@ -249,21 +245,21 @@ const VerticalTabs = () => {
         <TabPanel value={value} index={0}>
           <EHome />
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        {/*<TabPanel value={value} index={1}>
           <Tasks />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
+        </TabPanel>*/}
+        <TabPanel value={value} index={1}>
           <Attendance />
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={2}>
           <Projects />
         </TabPanel>
-        <TabPanel value={value} index={4}>
+        <TabPanel value={value} index={3}>
           <AppsWebsites />
         </TabPanel>
-        <TabPanel value={value} index={5}>
+        {/*<TabPanel value={value} index={5}>
           <Settings />
-        </TabPanel>
+        </TabPanel>*/}
         
       </Box>
     </Box>

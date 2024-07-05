@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import './styles.css'
 import { PieChart } from '@mui/x-charts/PieChart';
-import { Doughnut } from 'react-chartjs-2';
-import { Box, Typography, Checkbox, FormControlLabel, Avatar } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import 'tailwindcss/tailwind.css';
-import { CardContent, IconButton, } from '@mui/material';
+import { CardContent, IconButton } from '@mui/material';
 import Card from '@mui/material/Card';
 import { Stepper, Step, StepLabel, StepContent } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CircleIcon from '@mui/icons-material/Circle';
-import { left } from '@popperjs/core';
+
 import Button from '@mui/material/Button';
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  width: 230, // Fixed width
+  width: 225, // Fixed width
   height: 109, // Fixed height
   borderRadius: 0, // Set border radius
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Add shadow
@@ -73,8 +72,9 @@ function Attendance() {
     </Box>
     </div>
     <div className='flex grid-cols-3'>
+    <MyAttendance/>
       <TodayActivity/>
-      <MyAttendance/>
+      
     </div>
     </>
   );
@@ -101,7 +101,7 @@ const steps = [
 
 function TodayActivity() {
   return (
-    <Box sx={{ maxWidth: 360, margin: 'auto', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+    <Box sx={{ maxWidth: 360, margin: 'auto', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px',marginLeft:2 }}>
       <Typography variant="h6" gutterBottom sx={{ color: '#2979ff' }}>
         Today Activity
       </Typography>
@@ -158,8 +158,11 @@ const handleToggle = () => {
       </div>
   )
 }
+
 const MyAttendance=()=>{
   return(
+    <div className=' max-w-sm bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-4'>
+      <b className='ml-4 text-2xl'>Attendance</b>
     <PieChart
   series={[
     {
@@ -189,6 +192,7 @@ const MyAttendance=()=>{
     },
   }}
 />
+</div>
   )
 }
 export default Attendance;
