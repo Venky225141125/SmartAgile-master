@@ -120,7 +120,7 @@ const EmployeeDashboard = () => {
           </Typography>
           <Typography>
           <IconButton edge="start" color="inherit" aria-label="menu"  onClick={handleMenuOpen1}>
-            <Avatar alt="User Avatar" src='/emp3.jpg'/>
+          <Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />
           </IconButton>
           <Menu
         anchorE2={anchorE2}

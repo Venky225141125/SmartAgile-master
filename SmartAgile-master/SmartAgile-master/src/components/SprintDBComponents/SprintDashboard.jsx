@@ -14,15 +14,38 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Switch } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, MenuItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 const SprintDashboard = () => {
-  //const user=JSON.parse(localStorage.getItem("user"));
+  const user=JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
   const handleLogout = () => {
     
     navigate('/login');
   };
+  const [anchorEl, setAnchorEl] = useState(null);
+    const location = useLocation();
+    const currentPath = location.pathname;
+  
+    const handleMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+    };
+
+  
+    const menuItems = [
+      { text: ' Sprint Dashboard ', path: '/admin/sprint-dashboard' },
+      { text: ' Admin Dashboard', path: '/admin/admin-dashboard' },
+      { text: ' Group Dashboard', path: '/group/dashboard' },
+      { text: ' Employee Dashboard ', path: '/employee/dashboard' },
+    ];
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -35,13 +58,34 @@ const SprintDashboard = () => {
         }}
       >
         <Toolbar>
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenuOpen}>
+          <MenuIcon />
+        </IconButton>
+        <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {menuItems.map((item) => (
+          item.path !== currentPath && (
+            <MenuItem
+              component={Link}
+              to={item.path}
+              onClick={handleMenuClose}
+              key={item.text}
+            >
+              {item.text}
+            </MenuItem>
+          )
+        ))}
+      </Menu>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             SmartAgile
           </Typography>
           <Typography variant="h6" noWrap sx={{ flexGrow: 20 }}>
             <Timer/>
           </Typography>
-          {/*<Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />*/}
+          <Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
