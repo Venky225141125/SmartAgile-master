@@ -4,12 +4,13 @@ import psycopg2
 import pywinctl
 import threading
 from pynput import mouse, keyboard
-from datetime import datetime
+from datetime import datetime,date
 from django.conf import settings
 import ctypes
 import joblib
 import logging
 import pandas as pd
+import json
 
 rf_model_path = os.path.join(os.path.dirname(__file__), 'models', 'rf_model.pkl')
 rf_model = joblib.load(rf_model_path)
@@ -17,6 +18,7 @@ svm_model_path=os.path.join(os.path.dirname(__file__), 'models', 'svm_pipeline.p
 svm_model=joblib.load(svm_model_path)
 app_vectorizer_model_path=os.path.join(os.path.dirname(__file__), 'models', 'app_vectorizer.pkl')
 app_model=joblib.load(app_vectorizer_model_path)
+json_file_path = os.path.join(os.path.dirname(__file__), 'models', 'exe_to_software.json')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')  # Replace 'backend.settings' with your project settings module
 import django
 django.setup()
@@ -146,12 +148,12 @@ def track_application_usage(user_id):
 
     cursor.execute(f"""
         CREATE TABLE IF NOT EXISTS application_openings_count{table_suffix} (
-            ID SERIAL PRIMARY KEY,
-            ApplicationName TEXT UNIQUE,
-            OpenCount INT,
-            Date DATE,
-            UNIQUE (ApplicationName,Date)
-        )
+        ID SERIAL PRIMARY KEY,
+        ApplicationName TEXT,
+        OpenCount INT,
+        Date DATE,
+        UNIQUE (ApplicationName, Date)
+    );
     """)
     conn.commit()
 
@@ -165,7 +167,8 @@ def track_application_usage(user_id):
     loaded_pipeline = joblib.load(svm_model_path)
     vectorizer_app = joblib.load(app_vectorizer_model_path)
     model = joblib.load(rf_model_path)
-
+    with open(json_file_path, 'r') as file:
+            exe_to_software = json.load(file)
     logging.info("Loaded models and vectorizers.")
     try:
         while running_flag:
@@ -182,12 +185,12 @@ def track_application_usage(user_id):
                     if app_name is not None:
                         if any(browser in app_name for browser in top_100_browsers_list):
                             browser_name = next((browser for browser in top_100_browsers_list if browser in app_name), "Unknown Browser")
-                            prediction_input = pd.DataFrame([task], columns=['Task'])
-                            predicted_category = loaded_pipeline.predict(prediction_input)[0]
-
+                            software_name = exe_to_software.get(browser_name.lower(), 'Unknown Software')
+                            predicted_category = loaded_pipeline.predict([task])[0]
+                            # print(predicted_category)
                             cursor.execute(f"""
-                                INSERT INTO browser_usage{table_suffix} (BrowserName, Website, Category,Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s,CURRENT_DATE)
+                                INSERT INTO browser_usage{table_suffix} (BrowserName, Website, Category, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_DATE)
                                 ON CONFLICT (BrowserName, Website, Date)
                                 DO UPDATE SET
                                 Keystrokes = browser_usage{table_suffix}.Keystrokes + EXCLUDED.Keystrokes,
@@ -195,14 +198,15 @@ def track_application_usage(user_id):
                                 Scrolls = browser_usage{table_suffix}.Scrolls + EXCLUDED.Scrolls,
                                 IdleTime = browser_usage{table_suffix}.IdleTime + EXCLUDED.IdleTime,
                                 Duration = browser_usage{table_suffix}.Duration + EXCLUDED.Duration
-                            """, (browser_name, task, predicted_category,time_spent, idle_time, keystroke_count, click_count, scroll_count))
+                            """, (software_name, task, predicted_category, time_spent, idle_time, keystroke_count, click_count, scroll_count))
                         else:
                             new_app_vectorized = vectorizer_app.transform([app_name])
                             input_data = pd.DataFrame(new_app_vectorized.toarray(), columns=vectorizer_app.get_feature_names_out())
                             predicted_category = model.predict(input_data)[0]
+                            software_name = exe_to_software.get(app_name.lower(), 'Unknown Software')
                             cursor.execute(f"""
-                                INSERT INTO application_usage{table_suffix} (ApplicationName, Task,Category, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s,CURRENT_DATE)
+                                INSERT INTO application_usage{table_suffix} (ApplicationName, Task, Category, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_DATE)
                                 ON CONFLICT (ApplicationName, Task, Date)
                                 DO UPDATE SET
                                 Keystrokes = application_usage{table_suffix}.Keystrokes + EXCLUDED.Keystrokes,
@@ -210,16 +214,16 @@ def track_application_usage(user_id):
                                 Scrolls = application_usage{table_suffix}.Scrolls + EXCLUDED.Scrolls,
                                 IdleTime = application_usage{table_suffix}.IdleTime + EXCLUDED.IdleTime,
                                 Duration = application_usage{table_suffix}.Duration + EXCLUDED.Duration
-                            """, (app_name, task, predicted_category,time_spent, idle_time, keystroke_count, click_count, scroll_count))
+                            """, (software_name, task, predicted_category, time_spent, idle_time, keystroke_count, click_count, scroll_count))
 
                         conn.commit()
 
                         cursor.execute(f"""
-                            INSERT INTO application_openings_count{table_suffix} (ApplicationName, OpenCount)
-                            VALUES (%s, 1)
-                            ON CONFLICT (ApplicationName)
-                            DO UPDATE SET OpenCount = application_openings_count{table_suffix}.OpenCount + 1
-                        """, (app_name,))
+                                INSERT INTO application_openings_count{table_suffix} (ApplicationName, Date, OpenCount)
+                                VALUES (%s, %s, 1)
+                                ON CONFLICT (ApplicationName, Date)
+                                DO UPDATE SET OpenCount = application_openings_count{table_suffix}.OpenCount + 1
+                            """, (exe_to_software.get(app_name.lower(), 'Unknown Software'), date.today()))
                         conn.commit()
 
                 click_count = 0
