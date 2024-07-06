@@ -114,7 +114,6 @@ const EmployeeActivityTable = () => {
     if (event.target.value !== "Custom") {
       fetchData();
     }
-
   };
 
   const applyDateFilter = () => {
@@ -124,7 +123,6 @@ const EmployeeActivityTable = () => {
   if (loading) {
     return <CircularProgress />;
   }
-
   const filteredData = dateFilter === "Custom"
     ? data.filter(row => new Date(row.date) >= new Date(startDate) && new Date(row.date) <= new Date(endDate))
     : data.filter(row => {
@@ -144,9 +142,18 @@ const EmployeeActivityTable = () => {
           return true;
       }
     });
+  const formatDuration = (minutes) => {
+    // Calculate hours and remaining minutes
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = Math.round(minutes % 60);
+
+    // Return formatted string
+    return `${hours}:${remainingMinutes.toString().padStart(2, '0')}`;
+  };
 
   return (
     <Box className="p-1 w-auto">
+      
       <Box className="flex justify-end mb-4">
         <FormControl variant="outlined" className="mr-1">
           <InputLabel>Date Filter</InputLabel>
@@ -197,10 +204,11 @@ const EmployeeActivityTable = () => {
               <TableCell>Category</TableCell>
               <TableCell>Duration (min)</TableCell>
               <TableCell>Productive</TableCell>
+              <TableCell>Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData.map((row, index) => (
+          {filteredData.map((row, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Box className="flex items-center">
@@ -211,11 +219,14 @@ const EmployeeActivityTable = () => {
                 <TableCell>{row.category}</TableCell>
                 <TableCell>
                   <Box className="text-sm">
-                    <span>{row.duration} minutes</span>
+                    <span>{formatDuration(row.duration)} minutes</span>
                   </Box>
                 </TableCell>
                 <TableCell>
                   {row.category.toLowerCase() === "work" ? "Yes" : "No"}
+                </TableCell>
+                <TableCell>
+                  {format(new Date(row.date), "yyyy-MM-dd")}
                 </TableCell>
               </TableRow>
             ))}
