@@ -100,7 +100,7 @@ const GetStart = () => {
 };
 
 const icon = (
-  <Paper sx={{width: 700, height: 550, marginLeft:72, marginBottom: 2,marginTop:8 }} elevation={4}>
+  <Paper sx={{width: 700, height: 550, marginLeft:72, marginBottom: 2,marginTop:12 }} elevation={4}>
     <img src="./land2.jpg" alt="Your Image" style={{width:'100%',height:'100%'}} />
   </Paper>
 );

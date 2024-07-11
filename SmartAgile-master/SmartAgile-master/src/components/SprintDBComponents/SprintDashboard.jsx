@@ -85,7 +85,7 @@ const SprintDashboard = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 20 }}>
             <Timer/>
           </Typography>
-          <Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />
+          {/*<Avatar alt="User Avatar" src={user.profile_photo ? `http://localhost:8000${user.profile_photo}` : ''} />*/}
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
