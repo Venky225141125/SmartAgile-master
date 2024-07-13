@@ -25,6 +25,7 @@ django.setup()
 
 running_flag = False
 thread = None
+User_global_id=0
 from sklearn.exceptions import DataConversionWarning
 import warnings
 # Suppress specific warnings
@@ -155,10 +156,21 @@ def track_application_usage(user_id):
         UNIQUE (ApplicationName, Date)
     );
     """)
+    cursor.execute(f"""
+        CREATE TABLE IF NOT EXISTS attendence{table_suffix} (
+            ID SERIAL PRIMARY KEY,
+            login TIMESTAMP,
+            Date DATE,
+            logout TIMESTAMP,
+            duration REAL,
+            UNIQUE (Date)
+        )
+    """)
     conn.commit()
 
     previous_window = None
     start_time = time.time()
+    login_time=datetime.now()
     mouse_listener = mouse.Listener(on_click=on_click, on_scroll=on_scroll)
     keyboard_listener = keyboard.Listener(on_press=on_press)
 
@@ -187,6 +199,8 @@ def track_application_usage(user_id):
                             browser_name = next((browser for browser in top_100_browsers_list if browser in app_name), "Unknown Browser")
                             software_name = exe_to_software.get(browser_name.lower(), 'Unknown Software')
                             predicted_category = loaded_pipeline.predict([task])[0]
+                            if software_name=='Unknown Software':
+                                software_name=task.split('-')[-1]
                             # print(predicted_category)
                             cursor.execute(f"""
                                 INSERT INTO browser_usage{table_suffix} (BrowserName, Website, Category, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
@@ -204,6 +218,8 @@ def track_application_usage(user_id):
                             input_data = pd.DataFrame(new_app_vectorized.toarray(), columns=vectorizer_app.get_feature_names_out())
                             predicted_category = model.predict(input_data)[0]
                             software_name = exe_to_software.get(app_name.lower(), 'Unknown Software')
+                            if software_name=='Unknown Software':
+                                software_name=task.split('-')[-1]
                             cursor.execute(f"""
                                 INSERT INTO application_usage{table_suffix} (ApplicationName, Task, Category, Duration, IdleTime, Keystrokes, Clicks, Scrolls, Date)
                                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_DATE)
@@ -225,6 +241,15 @@ def track_application_usage(user_id):
                                 DO UPDATE SET OpenCount = application_openings_count{table_suffix}.OpenCount + 1
                             """, (exe_to_software.get(app_name.lower(), 'Unknown Software'), date.today()))
                         conn.commit()
+                        attendence_duration=time.time()-start_time
+                        cursor.execute(f"""
+                                INSERT INTO attendence{table_suffix} (login,Date,logout,Duration) 
+                                VALUES(%s,CURRENT_DATE,%s,%s)
+                                ON CONFLICT (Date)
+                                DO UPDATE SET
+                                Duration=attendence{table_suffix}.Duration+EXCLUDED.Duration
+                            """,(login_time,datetime.now(),attendence_duration))
+                        conn.commit()
 
                 click_count = 0
                 scroll_count = 0
@@ -242,9 +267,10 @@ def track_application_usage(user_id):
         mouse_listener.stop()
         keyboard_listener.stop()
         conn.close()
-
+    
 def start_continous_task(user_id):
-    global running_flag, thread
+    global running_flag, thread,User_global_id
+    User_global_id=user_id
     if not running_flag:
         running_flag = True
         thread = threading.Thread(target=track_application_usage, args=(user_id,))
@@ -252,9 +278,24 @@ def start_continous_task(user_id):
         print(f"Task started for user: {user_id}")
 
 def stop_continous_task():
-    global running_flag, thread
+    global running_flag, thread,User_global_id
     if running_flag:
         running_flag = False
         if thread is not None:
             thread.join()
+        table_suffix = f"_{User_global_id}"
+        db_settings = settings.DATABASES['default']
+        conn = psycopg2.connect(
+            dbname=db_settings['NAME'],
+            user=db_settings['USER'],
+            password=db_settings['PASSWORD'],
+            host=db_settings['HOST'],
+            port=db_settings['PORT']
+        )
+        cursor = conn.cursor()
+        current_time = datetime.now()
+        cursor.execute(f"""
+            UPDATE attendence{table_suffix} SET logout = %s WHERE Date = %s
+        """, (current_time,date.today()))
+        conn.commit()
         print("Task stopped")
