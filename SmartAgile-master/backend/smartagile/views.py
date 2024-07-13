@@ -1,5 +1,7 @@
 from rest_framework import generics
 from .models import SignupData
+import psycopg2
+from datetime import timedelta
 from .serializers import SignupDataSerializer
 from django.core.exceptions import ValidationError
 import traceback
@@ -18,69 +20,10 @@ from django.contrib.auth import authenticate, login
 from .models import SignupData
 from .serializers import SignupDataSerializer
 from .continous_task import start_continous_task,stop_continous_task
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import logout
+from collections import namedtuple
 
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
+AttendanceData=namedtuple('AttendanceData',['time_duration', 'offline_time'])
 
-#@method_decorator(csrf_exempt, name='dispatch')
-from django.http import JsonResponse
-from django.views import View
-from rest_framework.response import Response
-from django.core import validators
-from .models import SignupData
-from django.db import connection
-import logging
-#application_usage_15
-logger = logging.getLogger(__name__)
-
-@method_decorator(csrf_exempt, name='dispatch')
-class AppData(View):
-    def post(self, request):
-        try:
-            email = request.POST.get('email')
-
-            if not email:
-                return Response({'error': 'Email is required'}, status=400)
-            
-            validators.validate_email(email)  # Validate email format
-            user = SignupData.objects.filter(email=email).first()
-
-            if not user:
-                return JsonResponse({'error': 'User not found'}, status=404)
-
-            table_name = f'application_usage_{user.id}'
-
-            with connection.cursor() as cursor:
-                cursor.execute(f"""
-                    SELECT 
-                        applicationname, 
-                        category, 
-                        SUM(duration) as duration, 
-                        date
-                    FROM {table_name}
-                    GROUP BY applicationname, category, date
-                """)
-                data = cursor.fetchall()
-
-            data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2]} for row in data]
-
-            return JsonResponse(data_list, safe=False)
-
-        except validators.ValidationError as e:
-            logger.error(f"Validation error: {e}")
-            return JsonResponse({'error': 'Invalid email format'}, status=400)
-        except Exception as e:
-            logger.error(f"Unexpected error: {e}")
-            return JsonResponse({'error': 'An unexpected error occurred'}, status=500)
-@csrf_exempt
-def logout_view(request):
-    if request.method == 'POST':
-        stop_continous_task()
-        logout(request)
-        return JsonResponse({'message': 'Successfully logged out'}, status=200)
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
@@ -97,61 +40,51 @@ class LoginView(APIView):
             return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
         # Ensure user tables are created
-        self.ensure_user_tables(user_data.id)
         start_continous_task(user_data.id)
+
+        attendance_data = self.get_attendance_data(user_data.id)
         # Serialize user data
         serializer = SignupDataSerializer(user_data)
-        return Response({'message': 'Login successful.', 'user': serializer.data}, status=status.HTTP_200_OK)
+        print("attendance time_duration:",attendance_data.time_duration)
+        print("attendance offline_time:",attendance_data.offline_time)
+        return Response({
+            'message': 'Login successful.',
+            'user': serializer.data,
+            'attendance': {
+                "time_duration":attendance_data.time_duration,
+                "offline_time":attendance_data.offline_time
+            }
+        }, status=status.HTTP_200_OK)
 
-    def ensure_user_tables(self, user_id):
+    def get_attendance_data(self, user_id):
         table_suffix = f"_{user_id}"
+        db_settings = settings.DATABASES['default']
+        conn = psycopg2.connect(
+            dbname=db_settings['NAME'],
+            user=db_settings['USER'],
+            password=db_settings['PASSWORD'],
+            host=db_settings['HOST'],
+            port=db_settings['PORT']
+        )
+        cursor = conn.cursor()
 
-        with connection.cursor() as cursor:
-            # Check and create application_usage table if it does not exist
-            cursor.execute(f"""
-                CREATE TABLE IF NOT EXISTS application_usage{table_suffix} (
-                    ID SERIAL PRIMARY KEY,
-                    ApplicationName TEXT,
-                    Task TEXT,
-                    Category TEXT,
-                    Duration REAL,
-                    IdleTime REAL,
-                    Keystrokes REAL,
-                    Clicks REAL,
-                    Scrolls REAL,
-                    Date DATE,
-                    UNIQUE (ApplicationName, Task, Date)
-                )
-            """)
+        cursor.execute(f"""
+            SELECT SUM(duration) FROM attendence{table_suffix} WHERE Date = CURRENT_DATE
+        """)
+        result = cursor.fetchone()
+        conn.close()
 
-            # Check and create browser_usage table if it does not exist
-            cursor.execute(f"""
-                CREATE TABLE IF NOT EXISTS browser_usage{table_suffix} (
-                    ID SERIAL PRIMARY KEY,
-                    BrowserName TEXT,
-                    Website TEXT,
-                    Category TEXT,
-                    Duration REAL,
-                    IdleTime REAL,
-                    Keystrokes REAL,
-                    Clicks REAL,
-                    Scrolls REAL,
-                    Date DATE,
-                    UNIQUE (BrowserName, Website, Date)
-                )
-            """)
+        if result and result[0]:
+            time_duration = result[0]
+            offline_time = (8.5 * 3600) - time_duration  # 8.5 hours converted to seconds
+            offline_time = max(offline_time, 0)  # Ensure offline time is not negative
+        else:
+            time_duration = 0
+            offline_time = 8.5 * 3600
+        print("time_duration:",str(timedelta(seconds=time_duration)))
+        print("offline_time:", str(timedelta(seconds=offline_time)))
 
-            # Check and create application_openings_count table if it does not exist
-            cursor.execute(f"""
-                CREATE TABLE IF NOT EXISTS application_openings_count{table_suffix} (
-                    ID SERIAL PRIMARY KEY,
-                    ApplicationName TEXT UNIQUE,
-                    OpenCount INT,
-                    Date DATE,
-                    UNIQUE (ApplicationName,Date)
-                )
-            """)
-        
+        return AttendanceData(time_duration=str(timedelta(seconds=time_duration)),offline_time=str(timedelta(seconds=offline_time)))
 
 class SignupDataCreateView(APIView):
     def post(self, request):
@@ -261,3 +194,78 @@ class ResetPasswordView(APIView):
         except Exception as e:
             traceback.print_exc()
             return Response({'error': str(e)}, status=500)
+        
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+#@method_decorator(csrf_exempt, name='dispatch')
+from django.http import JsonResponse
+from django.views import View
+from rest_framework.response import Response
+from django.core import validators
+from .models import SignupData
+from django.db import connection
+import logging
+#application_usage_15
+logger = logging.getLogger(__name__)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AppData(View):
+    def post(self, request):
+        try:
+            email = request.POST.get('email')
+            
+            if not email:
+                return Response({'error': 'Email is required'}, status=400)
+            
+            validators.validate_email(email)  # Validate email format
+            user = SignupData.objects.filter(email=email).first()
+
+            if not user:
+                return JsonResponse({'error': 'User not found'}, status=404)
+
+            table_name = f'_{user.id}'
+
+            with connection.cursor() as cursor:
+                cursor.execute(f"""
+                    SELECT 
+                        applicationname, 
+                        category, 
+                        SUM(duration) as duration, 
+                        date
+                    FROM application_usage{table_name}
+                    GROUP BY applicationname, category, date
+                """)
+                data = cursor.fetchall()
+                cursor.execute(f"""
+                    SELECT 
+                        browsername, 
+                        category, 
+                        SUM(duration) as duration, 
+                        date
+                    FROM browser_usage{table_name}
+                    GROUP BY browsername, category, date
+                """)
+                browser_data=cursor.fetchall()
+            browser_data_list=[{'applicationname': row[0], 'category': row[1], 'duration': row[2], 'date':row[3]} for row in browser_data]
+            data_list = [{'applicationname': row[0], 'category': row[1], 'duration': row[2], 'date':row[3]} for row in data]
+            combined_list=data_list+browser_data_list
+            return JsonResponse(combined_list, safe=False)
+
+        except validators.ValidationError as e:
+            logger.error(f"Validation error: {e}")
+            return JsonResponse({'error': 'Invalid email format'}, status=400)
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return JsonResponse({'error': 'An unexpected error occurred'}, status=500)
+
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout
+@csrf_exempt
+def logout_view(request):
+    if request.method == 'POST':
+        stop_continous_task()
+        logout(request)
+        return JsonResponse({'message': 'Successfully logged out'}, status=200)
+    return JsonResponse({'error': 'Invalid request method'},status=400)
+
